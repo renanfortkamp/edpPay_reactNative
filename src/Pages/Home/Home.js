@@ -14,7 +14,7 @@ import { CmStyle } from "../../Styles/CmStyle";
 export default function Home({navigation}) {
 
     function navigateToSingUp(){
-        navigation.navigate('Login')
+        navigation.navigate('SingUp')
     }
 
     function navigateToLogin(){

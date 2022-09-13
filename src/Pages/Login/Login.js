@@ -8,6 +8,7 @@ export default function Login() {
 
     return (
         <SafeAreaView style={CmStyle.conteiner}>
+            
             <View style={{ marginBottom: 50 }}>
                 <ImageBackground
                     style={{ ...CmStyle.logoEdpCom, alignSelf: "center" }}
@@ -36,8 +37,13 @@ export default function Login() {
                     Entrar
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ alignSelf: "center", marginTop: 10 }}>
+            <TouchableOpacity style={{ alignSelf: "center", marginTop: 5 }}>
                 <Text style={{ color: "#fff",fontSize:15 }}>Esqueci minha senha</Text>
+            </TouchableOpacity>
+            
+            
+            <TouchableOpacity>
+                <Text style={{...CmStyle.greenColor,fontSize:25 }}>Abrir conta gratuita</Text>
             </TouchableOpacity>
 
            
