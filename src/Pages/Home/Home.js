@@ -9,6 +9,7 @@ import {
     ImageBackground,
 } from "react-native";
 import React, { useEffect, useState } from "react";
+import { CmStyle } from "../../Styles/CmStyle";
 
 export default function Home({navigation}) {
 
@@ -25,20 +26,20 @@ export default function Home({navigation}) {
         <SafeAreaView style={styles.conteiner}>
             <View style={{ marginBottom: 50 }}>
                 <ImageBackground
-                    style={{ ...styles.logoEdpCom, alignSelf: "center" }}
+                    style={{ ...CmStyle.logoEdpCom, alignSelf: "center" }}
                     resizeMode="contain"
                     source={require("../../imgs/logo.png")}
                 >
-                    <Text style={styles.logoText}>Pay</Text>
+                    <Text style={CmStyle.logoText}>Pay</Text>
                 </ImageBackground>
             </View>
-            <TouchableOpacity onPress={navigateToSingUp} style={{ ...styles.button, alignSelf: "center" }}>
+            <TouchableOpacity onPress={navigateToSingUp} style={{ ...CmStyle.button, alignSelf: "center" }}>
                 <Text style={{ fontSize: 20, fontWeight: "bold" }}>
                     Abrir conta gratuita
                 </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={navigateToLogin} style={{ ...styles.button, alignSelf: "center" }}>
+            <TouchableOpacity onPress={navigateToLogin} style={{ ...CmStyle.button, alignSelf: "center" }}>
                 <Text style={{ fontSize: 20, fontWeight: "bold" }}>
                     Fazer Login
                 </Text>
@@ -54,27 +55,4 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    button: {
-        marginTop: 20,
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 10,
-        width: "70%",
-        height: 60,
-        backgroundColor: "#28ff52",
-    },
-    logoText: {
-        marginTop: 45,
-        paddingLeft: 20,
-        color: "#28ff52",
-        alignSelf: "center",
-        fontWeight: "bold",
-        fontSize: 75,
-        position: "absolute",
-    },
-    logoEdpCom: {
-        width: 300,
-        height: 100,
-        marginBottom:10
-    },
-});
+})
