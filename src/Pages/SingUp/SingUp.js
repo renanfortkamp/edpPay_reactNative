@@ -18,6 +18,10 @@ export default function SingUp({navigation}) {
         navigation.navigate("Endereco")
     }
 
+    function navigateToHome(){
+        navigation.navigate("Home")
+    }
+
     return (
         <SafeAreaView
             style={{
@@ -135,6 +139,7 @@ export default function SingUp({navigation}) {
                     }}
                 >
                     <TouchableOpacity
+                        onPress={navigateToHome}
                         style={{
                             ...CmStyle.button,
                             alignSelf: "center",

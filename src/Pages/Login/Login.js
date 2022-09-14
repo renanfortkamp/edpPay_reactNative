@@ -10,9 +10,14 @@ import {
 import React, { useState } from "react";
 import { CmStyle } from "../../Styles/CmStyle";
 
-export default function Login() {
+export default function Login({navigation}) {
     const [cpf, setCpf] = useState("");
     const [password, setPassword] = useState("");
+
+    function navigateToSingUp(){
+        navigation.navigate("SingUp")
+    }
+
 
     return (
         <SafeAreaView style={{ ...CmStyle.conteiner, alignItems: "center", justifyContent:"space-between" }}>
@@ -52,7 +57,7 @@ export default function Login() {
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={{marginBottom:20}}>
+            <TouchableOpacity onPress={navigateToSingUp} style={{marginBottom:20}}>
                 <Text style={{ ...CmStyle.greenColor, fontSize: 25 }}>
                     Abrir conta gratuita
                 </Text>
