@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Home from "./src/Pages/Home/Home";
 import SingUp from "./src/Pages/SingUp/SingUp";
+import Endereco from "./src/Pages/SingUp/Endereco";
 import Login from "./src/Pages/Login/Login";
 
 const Stack = createStackNavigator();
@@ -13,9 +14,27 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen options={{headerShown:false}} name="Home" component={Home} />
-                <Stack.Screen options={{headerShown:false}} name="SingUp" component={SingUp} />
-                <Stack.Screen options={{headerShown:false}} name="Login" component={Login} />
+                <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="Home"
+                    component={Home}
+                />
+                <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="SingUp"
+                    component={SingUp}
+                />
+                <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="Endereco"
+                    component={Endereco}
+                />
+
+                <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="Login"
+                    component={Login}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

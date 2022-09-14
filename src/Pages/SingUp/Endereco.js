@@ -10,12 +10,15 @@ import {
 import React, { useState } from "react";
 import { CmStyle } from "../../Styles/CmStyle";
 
-export default function SingUp({navigation}) {
-    
+export default function Endereco({navigation}) {
     const [cpf, setCpf] = useState("");
 
-    function navigationToEndereco(){
-        navigation.navigate("Endereco")
+    function navigationToNovaConta(){
+        navigation.navigate("SingUp")
+    }
+
+    function navigationToTerms(){
+        navigation.navigate("Terms")
     }
 
     return (
@@ -35,7 +38,7 @@ export default function SingUp({navigation}) {
                         alignSelf: "center",
                     }}
                 >
-                    Nova Conta
+                    Endereço
                 </Text>
 
                 <Text
@@ -45,7 +48,7 @@ export default function SingUp({navigation}) {
                         marginBottom: 3,
                     }}
                 >
-                    Nome Completo
+                    CEP
                 </Text>
                 <TextInput
                     onChangeText={(text) => setNome(text)}
@@ -60,7 +63,7 @@ export default function SingUp({navigation}) {
                         marginBottom: 3,
                     }}
                 >
-                    Telefone
+                    Rua
                 </Text>
                 <TextInput
                     onChangeText={(text) => setTelefone(text)}
@@ -75,7 +78,7 @@ export default function SingUp({navigation}) {
                         marginBottom: 3,
                     }}
                 >
-                    Email
+                    Cidade
                 </Text>
                 <TextInput
                     onChangeText={(text) => setEmail(text)}
@@ -90,7 +93,7 @@ export default function SingUp({navigation}) {
                         marginBottom: 3,
                     }}
                 >
-                    Nº do RG
+                    Bairro
                 </Text>
                 <TextInput
                     onChangeText={(text) => setRg(text)}
@@ -105,7 +108,7 @@ export default function SingUp({navigation}) {
                         marginBottom: 3,
                     }}
                 >
-                    CPF
+                    Nº
                 </Text>
                 <TextInput
                     onChangeText={(text) => setCpf(text)}
@@ -120,7 +123,7 @@ export default function SingUp({navigation}) {
                         marginBottom: 3,
                     }}
                 >
-                    Password
+                    Complemento
                 </Text>
                 <TextInput
                     onChangeText={(text) => setPassword(text)}
@@ -135,6 +138,7 @@ export default function SingUp({navigation}) {
                     }}
                 >
                     <TouchableOpacity
+                        onPress={navigationToNovaConta}
                         style={{
                             ...CmStyle.button,
                             alignSelf: "center",
@@ -146,7 +150,6 @@ export default function SingUp({navigation}) {
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={navigationToEndereco}
                         style={{
                             ...CmStyle.button,
                             alignSelf: "center",

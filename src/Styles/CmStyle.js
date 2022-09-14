@@ -4,8 +4,6 @@ export const CmStyle = StyleSheet.create({
     conteiner: {
         backgroundColor: "#212529",
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
     },
     button: {
         marginTop: 20,
@@ -38,7 +36,7 @@ export const CmStyle = StyleSheet.create({
     },
     input:{
         alignSelf:'center',
-        width: '90%',
+        width: '100%',
         height: 60,
         backgroundColor:'#fff',
         marginVertical:5,
