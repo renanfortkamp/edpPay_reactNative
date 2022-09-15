@@ -24,9 +24,8 @@ export const CmStyle = StyleSheet.create({
         position: "absolute",
     },
     logoEdpCom: {
-        width: 300,
-        height: 100,
-        marginBottom:10
+        width: 350,
+        height: 250,
     },
     greenColor:{
         color: "#28ff52",

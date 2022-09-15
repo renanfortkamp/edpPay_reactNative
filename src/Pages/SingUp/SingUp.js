@@ -10,16 +10,29 @@ import {
 import React, { useState } from "react";
 import { CmStyle } from "../../Styles/CmStyle";
 
-export default function SingUp({navigation}) {
-    
+export default function SingUp({ navigation }) {
+    const [nome, setNome] = useState("");
+    const [telefone, setTelefone] = useState("");
+    const [email, setEmail] = useState("");
+    const [rg, setRg] = useState("");
     const [cpf, setCpf] = useState("");
+    const [password, setPassword] = useState("");
 
-    function navigationToEndereco(){
-        navigation.navigate("Endereco")
+    function navigationToEndereco() {
+        navigation.navigate("Endereco", {
+            dadosPessoais:{
+                nome: nome,
+                telefone: telefone,
+                email: email,
+                rg: rg,
+                cpf: cpf,
+                password: password,
+            },
+        });
     }
 
-    function navigateToHome(){
-        navigation.navigate("Home")
+    function navigateToHome() {
+        navigation.navigate("Home");
     }
 
     return (
@@ -37,6 +50,7 @@ export default function SingUp({navigation}) {
                         fontSize: 40,
                         marginVertical: 20,
                         alignSelf: "center",
+                        fontWeight: "bold",
                     }}
                 >
                     Nova Conta
@@ -53,7 +67,6 @@ export default function SingUp({navigation}) {
                 </Text>
                 <TextInput
                     onChangeText={(text) => setNome(text)}
-                    secureTextEntry={true}
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
 
@@ -68,7 +81,7 @@ export default function SingUp({navigation}) {
                 </Text>
                 <TextInput
                     onChangeText={(text) => setTelefone(text)}
-                    secureTextEntry={true}
+                    keyboardType="phone-pad"
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
 
@@ -83,7 +96,7 @@ export default function SingUp({navigation}) {
                 </Text>
                 <TextInput
                     onChangeText={(text) => setEmail(text)}
-                    secureTextEntry={true}
+                    keyboardType="email-address"
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
 
@@ -98,7 +111,7 @@ export default function SingUp({navigation}) {
                 </Text>
                 <TextInput
                     onChangeText={(text) => setRg(text)}
-                    secureTextEntry={true}
+                    keyboardType="number-pad"
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
 
@@ -113,7 +126,7 @@ export default function SingUp({navigation}) {
                 </Text>
                 <TextInput
                     onChangeText={(text) => setCpf(text)}
-                    secureTextEntry={true}
+                    keyboardType="number-pad"
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
 
@@ -135,7 +148,7 @@ export default function SingUp({navigation}) {
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-between",
-                        marginBottom:20,
+                        marginBottom: 20,
                     }}
                 >
                     <TouchableOpacity

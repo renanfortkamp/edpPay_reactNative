@@ -8,17 +8,37 @@ import {
     TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
+import { Picker } from "@react-native-picker/picker";
+
 import { CmStyle } from "../../Styles/CmStyle";
 
-export default function Endereco({navigation}) {
-    const [cpf, setCpf] = useState("");
+export default function Endereco({ navigation, route }) {
+    const [cep, setCep] = useState("");
+    const [rua, setRua] = useState("");
+    const [cidade, setCidade] = useState("");
+    const [estado, setEstado] = useState("");
+    const [bairro, setBairro] = useState("");
+    const [numero, setNumero] = useState("");
+    const [complemento, setComplemento] = useState("");
+    const endereco = {
+        cep: cep,
+        rua: rua,
+        cidade: cidade,
+        estado: estado,
+        bairro: bairro,
+        numero,
+        numero,
+        complemento: complemento,
+    };
+    const { dadosPessoais } = route.params;
+    const dadosCadastro = { ...dadosPessoais, endereco };
 
-    function navigationToNovaConta(){
-        navigation.navigate("SingUp")
+    function navigationToNovaConta() {
+        navigation.navigate("SingUp");
     }
 
-    function navigationToTerms(){
-        navigation.navigate("Terms")
+    function navigateToData() {
+        navigation.navigate("DataCobranca", dadosCadastro);
     }
 
     return (
@@ -51,7 +71,7 @@ export default function Endereco({navigation}) {
                     CEP
                 </Text>
                 <TextInput
-                    onChangeText={(text) => setNome(text)}
+                    onChangeText={(text) => setCep(text)}
                     secureTextEntry={true}
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
@@ -66,7 +86,7 @@ export default function Endereco({navigation}) {
                     Rua
                 </Text>
                 <TextInput
-                    onChangeText={(text) => setTelefone(text)}
+                    onChangeText={(text) => setRua(text)}
                     secureTextEntry={true}
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
@@ -81,7 +101,7 @@ export default function Endereco({navigation}) {
                     Cidade
                 </Text>
                 <TextInput
-                    onChangeText={(text) => setEmail(text)}
+                    onChangeText={(text) => setCidade(text)}
                     secureTextEntry={true}
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
@@ -93,10 +113,58 @@ export default function Endereco({navigation}) {
                         marginBottom: 3,
                     }}
                 >
+                    Estado
+                </Text>
+                <View
+                    style={{
+                        backgroundColor: "#fff",
+                        borderRadius: 10,
+                        height: 60,
+                        justifyContent: "center",
+                    }}
+                >
+                    <Picker onValueChange={(value) => setEstado(value)}>
+                        <Picker.Item label="Selecione um Estado" value="" />
+                        <Picker.Item label="AC" value="AC" />
+                        <Picker.Item label="AL" value="AL" />
+                        <Picker.Item label="AP" value="AP" />
+                        <Picker.Item label="AM" value="AM" />
+                        <Picker.Item label="BA" value="BA" />
+                        <Picker.Item label="CE" value="CE" />
+                        <Picker.Item label="DF" value="DF" />
+                        <Picker.Item label="ES" value="ES" />
+                        <Picker.Item label="GO" value="GO" />
+                        <Picker.Item label="MA" value="MA" />
+                        <Picker.Item label="MG" value="MG" />
+                        <Picker.Item label="MS" value="MS" />
+                        <Picker.Item label="MT" value="MT" />
+                        <Picker.Item label="PA" value="PA" />
+                        <Picker.Item label="PB" value="PB" />
+                        <Picker.Item label="PE" value="PE" />
+                        <Picker.Item label="PI" value="PI" />
+                        <Picker.Item label="PR" value="PR" />
+                        <Picker.Item label="RJ" value="RJ" />
+                        <Picker.Item label="RO" value="RO" />
+                        <Picker.Item label="RR" value="RR" />
+                        <Picker.Item label="RS" value="RS" />
+                        <Picker.Item label="SC" value="SC" />
+                        <Picker.Item label="SE" value="SE" />
+                        <Picker.Item label="SP" value="SP" />
+                        <Picker.Item label="TO" value="TO" />
+                    </Picker>
+                </View>
+
+                <Text
+                    style={{
+                        ...CmStyle.greenColor,
+                        fontSize: 20,
+                        marginBottom: 3,
+                    }}
+                >
                     Bairro
                 </Text>
                 <TextInput
-                    onChangeText={(text) => setRg(text)}
+                    onChangeText={(text) => setBairro(text)}
                     secureTextEntry={true}
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
@@ -111,7 +179,7 @@ export default function Endereco({navigation}) {
                     Nº
                 </Text>
                 <TextInput
-                    onChangeText={(text) => setCpf(text)}
+                    onChangeText={(text) => setNumero(text)}
                     secureTextEntry={true}
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
@@ -126,7 +194,7 @@ export default function Endereco({navigation}) {
                     Complemento
                 </Text>
                 <TextInput
-                    onChangeText={(text) => setPassword(text)}
+                    onChangeText={(text) => setComplemento(text)}
                     secureTextEntry={true}
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
@@ -134,7 +202,7 @@ export default function Endereco({navigation}) {
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-between",
-                        marginBottom:20,
+                        marginBottom: 20,
                     }}
                 >
                     <TouchableOpacity
@@ -150,6 +218,7 @@ export default function Endereco({navigation}) {
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                        onPress={navigateToData}
                         style={{
                             ...CmStyle.button,
                             alignSelf: "center",

@@ -8,12 +8,15 @@ import {
     TextInput,
     ImageBackground,
     StatusBar,
+    Dimensions
 } from "react-native";
 import LottieView from "lottie-react-native";
 
 import React, { useEffect, useState } from "react";
 
 import Qrimg from "../../imgs/94946-qr-scanner.json";
+
+const {height,width} = Dimensions.get("screen")
 
 import { CmStyle } from "../../Styles/CmStyle";
 
@@ -27,32 +30,34 @@ export default function Home({ navigation }) {
     }
 
     return (
-        <SafeAreaView
-            style={{ ...CmStyle.conteiner,alignItems:"center" }}
-        >
+        <SafeAreaView style={{ ...CmStyle.conteiner, alignItems: "center" }}>
             <StatusBar />
+            <View style={{width:width,height:170,justifyContent:"center",alignItems:"center"}}>
             <LottieView
                 autoPlay
                 style={{
-                    width: 200,
-                    height: 200,
-                    
+                    marginTop:10,
+                    width: 350
+                                        
                 }}
                 source={Qrimg}
             />
-            <View style={{ marginBottom: 50 }}>
-                <ImageBackground
-                    style={{ ...CmStyle.logoEdpCom, alignSelf: "center" }}
-                    resizeMode="contain"
-                    source={require("../../imgs/logo.png")}
-                >
-                    <Text style={{...CmStyle.logoText}}>Pay</Text>
-                </ImageBackground>
             </View>
             
+            <View>
+                <ImageBackground
+                    style={{ ...CmStyle.logoEdpCom, alignSelf: "center"}}
+                    resizeMode="contain"
+                    source={require("../../imgs/logo.png")}
+                ></ImageBackground>
+            </View>
+
             <TouchableOpacity
                 onPress={navigateToSingUp}
-                style={{ ...CmStyle.button, alignSelf: "center",marginTop:10 }}
+                style={{
+                    ...CmStyle.button,
+                    alignSelf: "center",
+                }}
             >
                 <Text style={{ fontSize: 20, fontWeight: "bold" }}>
                     Abrir conta gratuita
@@ -67,7 +72,6 @@ export default function Home({ navigation }) {
                     Fazer Login
                 </Text>
             </TouchableOpacity>
-           
         </SafeAreaView>
     );
 }

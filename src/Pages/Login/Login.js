@@ -21,14 +21,13 @@ export default function Login({navigation}) {
 
     return (
         <SafeAreaView style={{ ...CmStyle.conteiner, alignItems: "center", justifyContent:"space-between" }}>
-            <View style={{width:"100%",height:"90%", justifyContent:"center"}}>
-                <View style={{ marginBottom: 50 }}>
+            <View style={{width:"90%",height:"90%", justifyContent:"center"}}>
+                <View>
                     <ImageBackground
                         style={{ ...CmStyle.logoEdpCom, alignSelf: "center" }}
                         resizeMode="contain"
                         source={require("../../imgs/logo.png")}
                     >
-                        <Text style={CmStyle.logoText}>Pay</Text>
                     </ImageBackground>
                 </View>
                 <TextInput
@@ -44,7 +43,7 @@ export default function Login({navigation}) {
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
                 <TouchableOpacity
-                    style={{ ...CmStyle.button, alignSelf: "center" }}
+                    style={{ ...CmStyle.button, alignSelf: "center",width:"100%" }}
                 >
                     <Text style={{ fontSize: 25, fontWeight: "bold" }}>
                         Entrar
