@@ -69,7 +69,7 @@ function SingUpNavigator() {
             />
             <StackSingUp.Screen
                 options={{ headerShown: false, presentation: "modal" }}
-                name="DataCobrança"
+                name="DataCobranca"
                 component={DataCobranca}
             />
             <StackSingUp.Screen

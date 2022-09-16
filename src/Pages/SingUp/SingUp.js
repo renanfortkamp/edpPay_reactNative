@@ -20,7 +20,7 @@ export default function SingUp({ navigation }) {
 
     function navigationToEndereco() {
         navigation.navigate("Endereco", {
-            dadosPessoais:{
+            dadosPessoais: {
                 nome: nome,
                 telefone: telefone,
                 email: email,
@@ -32,7 +32,7 @@ export default function SingUp({ navigation }) {
     }
 
     function navigateToHome() {
-        navigation.navigate("Home");
+        navigation.goBack();
     }
 
     return (
@@ -43,138 +43,146 @@ export default function SingUp({ navigation }) {
                 alignItems: "center",
             }}
         >
-            <ScrollView style={{ width: "90%" }}>
-                <Text
-                    style={{
-                        ...CmStyle.greenColor,
-                        fontSize: 40,
-                        marginVertical: 20,
-                        alignSelf: "center",
-                        fontWeight: "bold",
-                    }}
-                >
-                    Nova Conta
-                </Text>
-
-                <Text
-                    style={{
-                        ...CmStyle.greenColor,
-                        fontSize: 20,
-                        marginBottom: 3,
-                    }}
-                >
-                    Nome Completo
-                </Text>
-                <TextInput
-                    onChangeText={(text) => setNome(text)}
-                    style={{ ...CmStyle.input, fontSize: 20 }}
-                />
-
-                <Text
-                    style={{
-                        ...CmStyle.greenColor,
-                        fontSize: 20,
-                        marginBottom: 3,
-                    }}
-                >
-                    Telefone
-                </Text>
-                <TextInput
-                    onChangeText={(text) => setTelefone(text)}
-                    keyboardType="phone-pad"
-                    style={{ ...CmStyle.input, fontSize: 20 }}
-                />
-
-                <Text
-                    style={{
-                        ...CmStyle.greenColor,
-                        fontSize: 20,
-                        marginBottom: 3,
-                    }}
-                >
-                    Email
-                </Text>
-                <TextInput
-                    onChangeText={(text) => setEmail(text)}
-                    keyboardType="email-address"
-                    style={{ ...CmStyle.input, fontSize: 20 }}
-                />
-
-                <Text
-                    style={{
-                        ...CmStyle.greenColor,
-                        fontSize: 20,
-                        marginBottom: 3,
-                    }}
-                >
-                    Nº do RG
-                </Text>
-                <TextInput
-                    onChangeText={(text) => setRg(text)}
-                    keyboardType="number-pad"
-                    style={{ ...CmStyle.input, fontSize: 20 }}
-                />
-
-                <Text
-                    style={{
-                        ...CmStyle.greenColor,
-                        fontSize: 20,
-                        marginBottom: 3,
-                    }}
-                >
-                    CPF
-                </Text>
-                <TextInput
-                    onChangeText={(text) => setCpf(text)}
-                    keyboardType="number-pad"
-                    style={{ ...CmStyle.input, fontSize: 20 }}
-                />
-
-                <Text
-                    style={{
-                        ...CmStyle.greenColor,
-                        fontSize: 20,
-                        marginBottom: 3,
-                    }}
-                >
-                    Password
-                </Text>
-                <TextInput
-                    onChangeText={(text) => setPassword(text)}
-                    secureTextEntry={true}
-                    style={{ ...CmStyle.input, fontSize: 20 }}
-                />
-                <View
-                    style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        marginBottom: 20,
-                    }}
-                >
-                    <TouchableOpacity
-                        onPress={navigateToHome}
-                        style={{
-                            ...CmStyle.button,
-                            alignSelf: "center",
-                            width: "45%",
-                        }}
-                    >
-                        <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-                            Voltar
+            <ScrollView style={{ width: "100%" }}>
+                <View style={{ width: "100%", alignItems: "center" }}>
+                    <View style={{ width: "90%" }}>
+                        <Text
+                            style={{
+                                ...CmStyle.greenColor,
+                                fontSize: 40,
+                                marginVertical: 20,
+                                alignSelf: "center",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            Nova Conta
                         </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={navigationToEndereco}
-                        style={{
-                            ...CmStyle.button,
-                            alignSelf: "center",
-                            width: "45%",
-                        }}
-                    >
-                        <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-                            Continuar
+
+                        <Text
+                            style={{
+                                ...CmStyle.greenColor,
+                                fontSize: 20,
+                                marginBottom: 3,
+                            }}
+                        >
+                            Nome Completo
                         </Text>
-                    </TouchableOpacity>
+                        <TextInput
+                            onChangeText={(text) => setNome(text)}
+                            style={{ ...CmStyle.input, fontSize: 20 }}
+                        />
+
+                        <Text
+                            style={{
+                                ...CmStyle.greenColor,
+                                fontSize: 20,
+                                marginBottom: 3,
+                            }}
+                        >
+                            Telefone
+                        </Text>
+                        <TextInput
+                            onChangeText={(text) => setTelefone(text)}
+                            keyboardType="phone-pad"
+                            style={{ ...CmStyle.input, fontSize: 20 }}
+                        />
+
+                        <Text
+                            style={{
+                                ...CmStyle.greenColor,
+                                fontSize: 20,
+                                marginBottom: 3,
+                            }}
+                        >
+                            Email
+                        </Text>
+                        <TextInput
+                            onChangeText={(text) => setEmail(text)}
+                            keyboardType="email-address"
+                            style={{ ...CmStyle.input, fontSize: 20 }}
+                        />
+
+                        <Text
+                            style={{
+                                ...CmStyle.greenColor,
+                                fontSize: 20,
+                                marginBottom: 3,
+                            }}
+                        >
+                            Nº do RG
+                        </Text>
+                        <TextInput
+                            onChangeText={(text) => setRg(text)}
+                            keyboardType="number-pad"
+                            style={{ ...CmStyle.input, fontSize: 20 }}
+                        />
+
+                        <Text
+                            style={{
+                                ...CmStyle.greenColor,
+                                fontSize: 20,
+                                marginBottom: 3,
+                            }}
+                        >
+                            CPF
+                        </Text>
+                        <TextInput
+                            onChangeText={(text) => setCpf(text)}
+                            keyboardType="number-pad"
+                            style={{ ...CmStyle.input, fontSize: 20 }}
+                        />
+
+                        <Text
+                            style={{
+                                ...CmStyle.greenColor,
+                                fontSize: 20,
+                                marginBottom: 3,
+                            }}
+                        >
+                            Password
+                        </Text>
+                        <TextInput
+                            onChangeText={(text) => setPassword(text)}
+                            secureTextEntry={true}
+                            style={{ ...CmStyle.input, fontSize: 20 }}
+                        />
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                marginBottom: 20,
+                            }}
+                        >
+                            <TouchableOpacity
+                                onPress={navigateToHome}
+                                style={{
+                                    ...CmStyle.button,
+                                    alignSelf: "center",
+                                    width: "45%",
+                                }}
+                            >
+                                <Text
+                                    style={{ fontSize: 25, fontWeight: "bold" }}
+                                >
+                                    Voltar
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={navigationToEndereco}
+                                style={{
+                                    ...CmStyle.button,
+                                    alignSelf: "center",
+                                    width: "45%",
+                                }}
+                            >
+                                <Text
+                                    style={{ fontSize: 25, fontWeight: "bold" }}
+                                >
+                                    Continuar
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>

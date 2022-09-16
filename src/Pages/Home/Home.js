@@ -36,7 +36,7 @@ export default function Home({ navigation }) {
             <LottieView
                 autoPlay
                 style={{
-                    marginTop:10,
+                    marginTop:15,
                     width: 350
                                         
                 }}
