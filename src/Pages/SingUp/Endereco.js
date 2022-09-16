@@ -20,27 +20,27 @@ export default function Endereco({ navigation, route }) {
     const [bairro, setBairro] = useState("");
     const [numero, setNumero] = useState("");
     const [complemento, setComplemento] = useState("");
-    const endereco = {
-        cep: cep,
-        rua: rua,
-        cidade: cidade,
-        estado: estado,
-        bairro: bairro,
-        numero,
-        numero,
-        complemento: complemento,
-    };
+   
     const { dadosPessoais } = route.params;
-    const dadosPessoaisEndereco = { ...dadosPessoais, endereco };
+    
+    console.log(dadosPessoais);
 
-    console.log(dadosPessoaisEndereco)
     function navigationToNovaConta() {
         navigation.goBack();
-
     }
 
     function navigateToData() {
-        navigation.navigate("DataCobranca", dadosPessoaisEndereco);
+        navigation.navigate("DataCobranca", {dadosPessoaisEndereco:{...dadosPessoais,
+            endereco: {
+                cep: cep,
+                rua: rua,
+                cidade: cidade,
+                estado: estado,
+                bairro: bairro,
+                numero,
+                numero,
+                complemento: complemento,
+            },}});
     }
 
     return (

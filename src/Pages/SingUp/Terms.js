@@ -13,6 +13,8 @@ import { CmStyle } from "../../Styles/CmStyle";
 
 export default function Terms({navigation,route}) {
 
+  const {dadosCadastro} = route.params
+  console.log(dadosCadastro)
   
     function navigateToDataCobranca() {
       navigation.goBack();

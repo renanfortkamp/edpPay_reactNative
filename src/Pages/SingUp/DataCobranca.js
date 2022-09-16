@@ -15,25 +15,22 @@ import { CmStyle } from "../../Styles/CmStyle";
 const { height, width } = Dimensions.get("screen");
 
 export default function DataCobranca({ navigation, route }) {
-    
+  const { dadosPessoaisEndereco } = route.params;
+  
 
-    const { dadosPessoaisEndereco } = route.params;
+    
 
     const [dataCobranca, setDataCobranca] = useState(null);
     const dataFormatada = dataCobranca
     ? dataCobranca.format("YYYY-MM-DD").toString()
     : "";
-    const dadosCadastro = { ...dadosPessoaisEndereco, dataFormatada };
-
-   
-
-    console.log(dadosPessoaisEndereco);
+    const dadosCadastro = {...dadosPessoaisEndereco, dataCobranca:dataFormatada };
 
     function navigationToEndereco() {
         navigation.goBack();
     }
     function navigationToTerms() {
-        navigation.navigate("Terms", dadosCadastro);
+        navigation.navigate("Terms", {dadosCadastro:dadosCadastro});
     }
 
     return (
@@ -99,6 +96,8 @@ export default function DataCobranca({ navigation, route }) {
                                 >
                                     Continuar
                                 </Text>
+
+
                             </TouchableOpacity>
                         </View>
                     </View>
