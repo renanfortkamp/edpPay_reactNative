@@ -28,7 +28,8 @@ export default function Terms({ navigation, route }) {
             },
             body: JSON.stringify(dados)
         } )
-        .then(()=>{
+        .then(async(response)=>{
+            const data = await response.json()
             alert("Usuario cadastrado com sucesso!")
             navigation.navigate("Login");
         })

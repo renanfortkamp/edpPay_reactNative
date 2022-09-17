@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { CmStyle } from "../../Styles/CmStyle";
+import { api } from "../Services/Service";
 
 export default function Login({navigation}) {
     const [cpf, setCpf] = useState("");
@@ -18,6 +19,23 @@ export default function Login({navigation}) {
         navigation.navigate("SingUp")
     }
 
+    
+
+    function login(){
+        fetch(api + "/users?user.cpf=" + cpf + "&password=" + password )
+        .then(async(Response)=>{
+            const data = await Response.json()
+            if(data.length ===1){
+                const id = data[0].user.id
+                
+                navigation.navigate('conta', {id:"id"})
+
+            }
+        }
+            )
+        .catch(error=>alert("erro",error))
+        
+    }
 
     return (
         <SafeAreaView style={{ ...CmStyle.conteiner, alignItems: "center", justifyContent:"space-between" }}>
@@ -43,6 +61,7 @@ export default function Login({navigation}) {
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
                 <TouchableOpacity
+                    onPress={login}
                     style={{ ...CmStyle.button, alignSelf: "center",width:"100%" }}
                 >
                     <Text style={{ fontSize: 25, fontWeight: "bold" }}>

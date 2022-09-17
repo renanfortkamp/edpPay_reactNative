@@ -1,5 +1,25 @@
 {
-    "users":{
-
-    }
+    "users": [
+        {   
+            "user": {
+                "id":1,
+                "nome": "Renan Fortkamp ",
+                "telefone": "48996642538",
+                "email": "renanfortkamp@hotmail.com",
+                "rg": "64649595",
+                "cpf": "12345",
+                "password": "12345"
+            },
+            "endereco": {
+                "cep": "8813742",
+                "rua": "alameda doa ipes",
+                "cidade": "palhoca",
+                "estado": "SC",
+                "bairro": "ponte do imaruim",
+                "numero": "194",
+                "complemento": "casa"
+            },
+            "dataCobranca": "2022-09-22"
+        }
+    ]
 }

@@ -6,7 +6,9 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "api": "json-server -w database.json  -p 3333",
+    "ngrok": "npx ngrok http 3333"
   },
   "dependencies": {
     "@react-native-picker/picker": "^2.4.4",
