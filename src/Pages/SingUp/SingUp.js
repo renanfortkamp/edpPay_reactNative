@@ -19,8 +19,9 @@ export default function SingUp({ navigation }) {
     const [password, setPassword] = useState("");
 
     function navigationToEndereco() {
+        
         navigation.navigate("Endereco", {
-            dadosPessoais: {
+            user:{
                 nome: nome,
                 telefone: telefone,
                 email: email,

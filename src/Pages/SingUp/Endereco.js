@@ -21,16 +21,16 @@ export default function Endereco({ navigation, route }) {
     const [numero, setNumero] = useState("");
     const [complemento, setComplemento] = useState("");
    
-    const { dadosPessoais } = route.params;
+    const { user } = route.params;
     
-    console.log(dadosPessoais);
+    console.log(user);
 
     function navigationToNovaConta() {
         navigation.goBack();
     }
 
     function navigateToData() {
-        navigation.navigate("DataCobranca", {dadosPessoaisEndereco:{...dadosPessoais,
+        navigation.navigate("DataCobranca", {dados:{user,
             endereco: {
                 cep: cep,
                 rua: rua,

@@ -15,7 +15,7 @@ import { CmStyle } from "../../Styles/CmStyle";
 const { height, width } = Dimensions.get("screen");
 
 export default function DataCobranca({ navigation, route }) {
-  const { dadosPessoaisEndereco } = route.params;
+  const { dados } = route.params;
   
 
     
@@ -24,15 +24,13 @@ export default function DataCobranca({ navigation, route }) {
     const dataFormatada = dataCobranca
     ? dataCobranca.format("YYYY-MM-DD").toString()
     : "";
-    const dadosCadastro = {...dadosPessoaisEndereco, dataCobranca:dataFormatada };
 
     function navigationToEndereco() {
         navigation.goBack();
     }
     function navigationToTerms() {
-        navigation.navigate("Terms", {dadosCadastro:dadosCadastro});
+        navigation.navigate("Terms", {dados:{...dados,dataCobranca:dataFormatada}});
     }
-
     return (
         <SafeAreaView
             style={{
