@@ -7,7 +7,7 @@ import {
     ScrollView,
     TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 
 import { CmStyle } from "../../Styles/CmStyle";
@@ -25,12 +25,43 @@ export default function Endereco({ navigation, route }) {
     
     console.log(user);
 
+    useEffect(()=>{
+        if(cep.length == 8){
+            fetch("https://viacep.com.br/ws/"+ cep +"/json/")
+            .then(async (response)=>{
+                const data = await response.json()
+                
+                setRua(data.logradouro)
+                setCidade(data.localidade)
+                setEstado(data.uf)
+                setBairro(data.bairro)
+                setComplemento(data.complemento)
+            })
+            .catch((error)=>{console.log(error)})
+        }
+    },[cep])
+
     function navigationToNovaConta() {
         navigation.goBack();
     }
 
     function navigateToData() {
-        navigation.navigate("DataCobranca", {dados:{user,
+
+        if (cep.length != 8) {
+            alert("Digite um cep valido com 8 digitos");
+        } else if (!rua) {
+            alert("Digite sua rua");
+        } else if (!cidade) {
+            alert("Digite sua cidade");
+        } else if (!estado) {
+            alert("Selecione seu estado");
+        } else if (!bairro) {
+            alert("Digite seu bairro");
+        } else if (!numero) {
+            alert("Digite numero de sua moradia");
+        } else {
+
+        navigation.navigate("DataCobranca", {dados:{...user,
             endereco: {
                 cep: cep,
                 rua: rua,
@@ -40,7 +71,7 @@ export default function Endereco({ navigation, route }) {
                 numero,
                 numero,
                 complemento: complemento,
-            },}});
+            },}});}
     }
 
     return (
@@ -75,8 +106,9 @@ export default function Endereco({ navigation, route }) {
                             CEP
                         </Text>
                         <TextInput
+                            
                             onChangeText={(text) => setCep(text)}
-                            secureTextEntry={true}
+                            keyboardType="number-pad"
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
 
@@ -90,8 +122,8 @@ export default function Endereco({ navigation, route }) {
                             Rua
                         </Text>
                         <TextInput
+                            placeholder={rua}
                             onChangeText={(text) => setRua(text)}
-                            secureTextEntry={true}
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
 
@@ -105,8 +137,8 @@ export default function Endereco({ navigation, route }) {
                             Cidade
                         </Text>
                         <TextInput
+                            placeholder={cidade}
                             onChangeText={(text) => setCidade(text)}
-                            secureTextEntry={true}
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
 
@@ -174,8 +206,8 @@ export default function Endereco({ navigation, route }) {
                             Bairro
                         </Text>
                         <TextInput
+                        placeholder={bairro}
                             onChangeText={(text) => setBairro(text)}
-                            secureTextEntry={true}
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
 
@@ -190,7 +222,7 @@ export default function Endereco({ navigation, route }) {
                         </Text>
                         <TextInput
                             onChangeText={(text) => setNumero(text)}
-                            secureTextEntry={true}
+                            keyboardType="number-pad"
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
 
@@ -204,8 +236,8 @@ export default function Endereco({ navigation, route }) {
                             Complemento
                         </Text>
                         <TextInput
+                        placeholder={complemento}
                             onChangeText={(text) => setComplemento(text)}
-                            secureTextEntry={true}
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
                         <View
