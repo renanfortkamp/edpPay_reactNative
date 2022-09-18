@@ -19,17 +19,30 @@ export default function SingUp({ navigation }) {
     const [password, setPassword] = useState("");
 
     function navigationToEndereco() {
-        
-        navigation.navigate("Endereco", {
-            user:{
-                nome: nome,
-                telefone: telefone,
-                email: email,
-                rg: rg,
-                cpf: cpf,
-                password: password,
-            },
-        });
+        if (!nome || nome.length < 8 || nome.length > 120) {
+            alert("Digite nome valido entre 8 e 120 caracteres");
+        } else if (!telefone) {
+            alert("Digite um numero de telefone");
+        } else if (!email) {
+            alert("Digite um email");
+        } else if (!rg) {
+            alert("Digite seu rg");
+        } else if (!cpf) {
+            alert("Digite seu cpf");
+        } else if (!password || password.length < 8 || password.length > 16) {
+            alert("Digite uma senha valida entre 8 e 16 caracteres");
+        } else {
+            navigation.navigate("Endereco", {
+                user: {
+                    nome: nome,
+                    telefone: telefone,
+                    email: email,
+                    rg: rg,
+                    cpf: cpf,
+                    password: password,
+                },
+            });
+        }
     }
 
     function navigateToHome() {
