@@ -8,45 +8,69 @@ import {
     TextInput,
 } from "react-native";
 import React, { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CmStyle } from "../../Styles/CmStyle";
 import { api } from "../Services/Service";
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
     const [cpf, setCpf] = useState("");
     const [password, setPassword] = useState("");
 
-    function navigateToSingUp(){
-        navigation.navigate("SingUp")
+    function navigateToSingUp() {
+        navigation.navigate("SingUp");
     }
 
-    
-
-    function login(){
-        fetch(api + "/users?user.cpf=" + cpf + "&password=" + password )
-        .then(async(Response)=>{
-            const data = await Response.json()
-            if(data.length ===1){
-                const id = data[0].user.id
-                
-                navigation.navigate('conta', {id:"id"})
-
-            }
+    function login() {
+        if (!cpf) {
+            alert("Digite seu cpf")
+        } else if (!password) {
+            alert("Digite sua senha ")
+        } else {
+            fetch(api + "/users?cpf=" + cpf + "&password=" + password)
+                .then(async (Response) => {
+                    const data = await Response.json();
+                    if (data.length === 1) {
+                        const userId = data[0].id;
+                        saveId(userId);
+                    } else alert("Cpf ou Senha invalido");
+                })
+                .catch((error) => {console.log("Error ao logar:", error)});
         }
-            )
-        .catch(error=>alert("erro",error))
-        
+    }
+
+    async function saveId(userId) {
+        try {
+            await AsyncStorage.setItem(
+                "@storage_Key",
+                JSON.stringify([userId])
+            );
+            navigation.navigate("conta");
+        } catch (error) {
+            alert("Houve um erro ao salvar");
+        }
     }
 
     return (
-        <SafeAreaView style={{ ...CmStyle.conteiner, alignItems: "center", justifyContent:"space-between" }}>
-            <View style={{width:"90%",height:"90%", justifyContent:"center"}}>
+        <SafeAreaView
+            style={{
+                ...CmStyle.conteiner,
+                alignItems: "center",
+                justifyContent: "space-between",
+            }}
+        >
+            <View
+                style={{
+                    width: "90%",
+                    height: "90%",
+                    justifyContent: "center",
+                }}
+            >
                 <View>
                     <ImageBackground
                         style={{ ...CmStyle.logoEdpCom, alignSelf: "center" }}
                         resizeMode="contain"
                         source={require("../../imgs/logo.png")}
-                    >
-                    </ImageBackground>
+                    ></ImageBackground>
                 </View>
                 <TextInput
                     onChangeText={(text) => setCpf(text)}
@@ -62,7 +86,11 @@ export default function Login({navigation}) {
                 />
                 <TouchableOpacity
                     onPress={login}
-                    style={{ ...CmStyle.button, alignSelf: "center",width:"100%" }}
+                    style={{
+                        ...CmStyle.button,
+                        alignSelf: "center",
+                        width: "100%",
+                    }}
                 >
                     <Text style={{ fontSize: 25, fontWeight: "bold" }}>
                         Entrar
@@ -75,7 +103,10 @@ export default function Login({navigation}) {
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity onPress={navigateToSingUp} style={{marginBottom:20}}>
+            <TouchableOpacity
+                onPress={navigateToSingUp}
+                style={{ marginBottom: 20 }}
+            >
                 <Text style={{ ...CmStyle.greenColor, fontSize: 25 }}>
                     Abrir conta gratuita
                 </Text>
