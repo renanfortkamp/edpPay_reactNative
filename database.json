@@ -1,15 +1,13 @@
 {
     "users": [
-        {   
-            "user": {
-                "id":1,
-                "nome": "Renan Fortkamp ",
-                "telefone": "48996642538",
-                "email": "renanfortkamp@hotmail.com",
-                "rg": "64649595",
-                "cpf": "12345",
-                "password": "12345"
-            },
+        {
+            "id": 1,
+            "nome": "Renan Fortkamp ",
+            "telefone": "48996642538",
+            "email": "renanfortkamp@hotmail.com",
+            "rg": "64649595",
+            "cpf": "12345",
+            "password": "12345",
             "endereco": {
                 "cep": "8813742",
                 "rua": "alameda doa ipes",
@@ -20,6 +18,77 @@
                 "complemento": "casa"
             },
             "dataCobranca": "2022-09-22"
+        },
+        {
+            "nome": "Jsjajwj",
+            "telefone": "64949944",
+            "email": "Jsjsjs",
+            "rg": "646464",
+            "cpf": "122",
+            "password": "122",
+            "endereco": {
+                "cep": "813p742",
+                "rua": "rua alma",
+                "cidade": "palhca",
+                "estado": "PR",
+                "bairro": "iqjaja",
+                "numero": "922",
+                "complemento": ""
+            },
+            "dataCobranca": "2022-09-30",
+            "id": 2
+        },
+        {
+            "nome": "Reinaldo",
+            "telefone": "4899664649",
+            "email": "renanfortkamp@hotmail.com",
+            "rg": "489494",
+            "cpf": "222",
+            "password": "222",
+            "endereco": {
+                "cep": "88130742",
+                "rua": "Alameda dos Ipês",
+                "cidade": "Palhoça",
+                "estado": "SC",
+                "bairro": "Ponte do Imaruim",
+                "numero": "184",
+                "complemento": ""
+            },
+            "dataCobranca": "2022-09-19",
+            "id": 3
+        }
+    ],
+    "invoices": [
+        {
+            "pagador": 222,
+            "id": 1234534,
+            "amount": 230.23,
+            "recipient": "EPP Energias do Mundo"
+        },
+        {
+            "pagador": 223,
+            "id": 1234534,
+            "amount": 230.23,
+            "recipient": "EPP Energias do Mundo"
+        },
+        {
+            "pagador": 222,
+            "id": 12334,
+            "amount": 20.23,
+            "recipient": "EPP Energias do Mundo"
+        }
+    ],
+
+    "debts": [
+        {
+            "id": 1234534,
+            "amount": 230.23,
+            "recipient": "EPP Energias do Mundo"
+        },
+        {
+            "id": 545434326,
+            "amount": 30.23,
+            "recipient": "DevInHouse Ltda"
         }
     ]
 }
