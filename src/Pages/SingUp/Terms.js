@@ -21,6 +21,10 @@ export default function Terms({ navigation, route }) {
         navigation.goBack();
     }
     function navigateToLogin() {
+        if(isEnabled == false){
+            alert("Para continuar é necessario aceitar os termos de uso")
+        }else{
+            
         fetch(api + "/users",{
             method:'POST',
             headers:{
@@ -28,12 +32,12 @@ export default function Terms({ navigation, route }) {
             },
             body: JSON.stringify(dados)
         } )
-        .then(async(response)=>{
-            const data = await response.json()
+        .then(()=>{
             alert("Usuario cadastrado com sucesso!")
-            navigation.navigate("Login");
-        })
-        .catch(alert("Usuario não cadastrado, tente novamente!"))
+            navigation.navigate("Login");}
+        )
+        .catch((error)=>{console.log("Usuario não cadastrado erro:", error)})
+        }
     }
     return (
         <SafeAreaView
@@ -144,7 +148,7 @@ export default function Terms({ navigation, route }) {
                                 <Text
                                     style={{ fontSize: 25, fontWeight: "bold" }}
                                 >
-                                    Continuar
+                                    Finalizar
                                 </Text>
                             </TouchableOpacity>
                         </View>
