@@ -29,7 +29,13 @@ export default function DataCobranca({ navigation, route }) {
         navigation.goBack();
     }
     function navigationToTerms() {
-        navigation.navigate("Terms", {dados:{...dados,dataCobranca:dataFormatada}});
+        if(!dataCobranca){
+            alert("Escolha data de sua cobrança")
+        }else{
+            navigation.navigate("Terms", {dados:{...dados,dataCobranca:dataFormatada}});
+
+        }
+
     }
     return (
         <SafeAreaView
@@ -50,11 +56,11 @@ export default function DataCobranca({ navigation, route }) {
                                 alignSelf: "center",
                             }}
                         >
-                            Data de Cobrança
+                            Qual data da cobrança?
                         </Text>
                         <View style={{ backgroundColor: "#fff", padding: 20 }}>
                             <CalendarPicker
-                                selectedStartDate={"2022-09-25"}
+                                // selectedStartDate={"2022-09-25"}
                                 width={width - 50}
                                 onDateChange={setDataCobranca}
                             />
