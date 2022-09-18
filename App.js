@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import Home from "./src/Pages/Home/Home";
 import Login from "./src/Pages/Login/Login";
@@ -79,11 +80,50 @@ function SingUpNavigator() {
 
 function ContaNavigator() {
     return (
-        <Tab.Navigator initialRouteName="conta">
-            <Tab.Screen name="Conta" component={Conta} />
-            <Tab.Screen name="Pagamento" component={Pagamento} />
-            <Tab.Screen name="Detalhes" component={Detalhes} />
-            <Tab.Screen name="Boletos" component={Boletos} />
+        <Tab.Navigator
+        
+        tabBarOptions={{
+            activeTintColor: '#000',
+            inactiveTintColor: '#262626',
+            activeBackgroundColor: "#00f530",
+            inactiveBackgroundColor: '#28ff52',
+         }}
+            initialRouteName="conta"
+        >
+            <Tab.Screen
+                options={{
+                    headerShown: false,
+                    tabBarIcon: () => (
+                        <Icon name="account-box" color={"#000"} size={30} />
+                    ),
+                }}
+                name="Conta"
+                component={Conta}
+            />
+            <Tab.Screen
+                options={{
+                    headerShown: false,
+                    tabBarIcon: () => (
+                        <Icon name="barcode-scan" color={"#000"} size={30} />
+                    ),
+                }}
+                name="Pagamento"
+                component={Pagamento}
+            />
+            <Tab.Screen
+                options={{
+                    headerShown: false,
+                    tabBarIcon: () => (
+                        <Icon
+                            name="format-list-bulleted-square"
+                            color={"#000"}
+                            size={30}
+                        />
+                    ),
+                }}
+                name="Boletos"
+                component={Boletos}
+            />
         </Tab.Navigator>
     );
 }
