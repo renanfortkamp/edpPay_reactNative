@@ -4,6 +4,7 @@ import {
     View,
     TouchableOpacity,
     Dimensions,
+    SafeAreaView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -17,6 +18,7 @@ export default function Boletos() {
     const [id, setId] = useState("");
     const [user, setUser] = useState([]);
     const [pagamentos, setPagamentos] = useState([]);
+    const [render, setRender] = useState(false);
     const focused = useIsFocused();
 
     const getId = async () => {
@@ -42,16 +44,21 @@ export default function Boletos() {
     }
 
     function getPagamentos() {
-        fetch(api + "/invoices?pagador=" + user[0].cpf)
-            .then(async (Response) => {
-                const data = await Response.json();
-                if (data.length === 1) {
-                    setPagamentos(data);
-                }
-            })
-            .catch((error) => {
-                console.log("error ao recupar pagamento: ", error);
-            });
+        try {
+            fetch(api + "/invoices?cpf=" + user[0].cpf)
+                .then(async (Response) => {
+                    const dataInvoices = await Response.json();
+                    if (dataInvoices.length === 1) {
+                        setPagamentos(dataInvoices);
+                        setRender(true);
+                    }
+                })
+                .catch((error) => {
+                    console.log("error ao recupar pagamento: ", error);
+                });
+        } catch (error) {
+            console.log("erro no try:", error);
+        }
     }
 
     useEffect(() => {
@@ -59,35 +66,46 @@ export default function Boletos() {
     }, [user]);
 
     useEffect(() => {
+        setRender(false);
         getId();
     }, [focused]);
     return (
-        <View>
+        <SafeAreaView
+        // style={{ ...CmStyle.conteiner, backgroundColor: "#212529" }}
+        >
             <Text>meu id é : {id}</Text>
-            {pagamentos == [] ? (
-                <Text>Nenhum pagamento realizado</Text>
-            ) : (
-                pagamentos.map((boleto) => (
-                    <View
-                        style={{ borderColor: "#000", borderWidth: 1,padding:5 }}
+            {render == false && <Text>Nenhum pagamento realizado</Text>}
+
+            {render == true &&
+                pagamentos[0].pagamentos.map((boleto) => (
+                    <TouchableOpacity
+                        style={{
+                            borderColor: "#000",
+                            borderWidth: 1,
+                            padding: 5,
+                            marginVertical: 5,
+                            backgroundColor: "#28ff52",
+                        }}
                         key={boleto.id}
                     >
                         <View
                             style={{
                                 flexDirection: "row",
                                 justifyContent: "space-between",
-                                marginBottom:10,
+                                marginBottom: 10,
                             }}
                         >
-                            <Text style={{fontSize:17}}>18-09-2022</Text>
-                            <Text style={{fontSize:17}}>R$ {boleto.amount}</Text>
+                            <Text style={{ fontSize: 17 }}>18-09-2022</Text>
+                            <Text style={{ fontSize: 17 }}>
+                                R$ {boleto.amount}
+                            </Text>
                         </View>
 
                         <Text style={{ fontSize: 25 }}>{boleto.recipient}</Text>
-                    </View>
-                ))
-            )}
-        </View>
+                    </TouchableOpacity>
+                ))}
+            {console.log(pagamentos)}
+        </SafeAreaView>
     );
 }
 
