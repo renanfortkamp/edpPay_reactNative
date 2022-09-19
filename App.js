@@ -46,6 +46,11 @@ export default function App() {
                     name="conta"
                     component={ContaNavigator}
                 />
+                <Stack.Screen
+                    options={{ headerShown: false, presentation: "modal" }}
+                    name="Detalhes"
+                    component={Detalhes}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
@@ -81,17 +86,18 @@ function SingUpNavigator() {
 function ContaNavigator() {
     return (
         <Tab.Navigator
-        
-        tabBarOptions={{
-            activeTintColor: '#000',
-            inactiveTintColor: '#262626',
-            activeBackgroundColor: "#00f530",
-            inactiveBackgroundColor: '#28ff52',
-         }}
+            tabBarOptions={{
+                activeTintColor: "#000",
+                inactiveTintColor: "#262626",
+                activeBackgroundColor: "#00f530",
+                inactiveBackgroundColor: "#28ff52",
+            }}
             initialRouteName="conta"
         >
             <Tab.Screen
+            
                 options={{
+                    
                     headerShown: false,
                     tabBarIcon: () => (
                         <Icon name="account-box" color={"#000"} size={30} />
