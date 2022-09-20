@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     Dimensions,
     SafeAreaView,
+    ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,6 +13,7 @@ import { api } from "../Services/Service";
 import { CmStyle } from "../../Styles/CmStyle";
 import { useIsFocused } from "@react-navigation/native";
 import { isSearchBarAvailableForCurrentPlatform } from "react-native-screens";
+
 
 export default function Boletos() {
     const { width, height } = Dimensions.get("screen");
@@ -45,10 +47,10 @@ export default function Boletos() {
 
     function getPagamentos() {
         try {
-            fetch(api + "/invoices?cpf=" + user[0].cpf)
+            fetch(api + "/invoices?userId=" + id)
                 .then(async (Response) => {
                     const dataInvoices = await Response.json();
-                    if (dataInvoices.length === 1) {
+                    if (dataInvoices.length >= 1) {
                         setPagamentos(dataInvoices);
                         setRender(true);
                     }
@@ -71,40 +73,55 @@ export default function Boletos() {
     }, [focused]);
     return (
         <SafeAreaView
-        // style={{ ...CmStyle.conteiner, backgroundColor: "#212529" }}
+            style={{ ...CmStyle.conteiner, backgroundColor: "#212529" }}
         >
-            <Text>meu id é : {id}</Text>
-            {render == false && <Text>Nenhum pagamento realizado</Text>}
+            <Text style={{...CmStyle.greenColor, fontSize:30,fontWeight:"bold",alignSelf:'center', marginVertical:10}}>Boletos Pagos</Text>
+            <ScrollView>
+                
 
-            {render == true &&
-                pagamentos[0].pagamentos.map((boleto) => (
-                    <TouchableOpacity
+                {render == false && (
+                    <Text
                         style={{
-                            borderColor: "#000",
-                            borderWidth: 1,
-                            padding: 5,
-                            marginVertical: 5,
-                            backgroundColor: "#28ff52",
+                            ...CmStyle.greenColor,
+                            alignSelf: "center",
+                            fontSize: 20,
                         }}
-                        key={boleto.id}
                     >
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                marginBottom: 10,
-                            }}
-                        >
-                            <Text style={{ fontSize: 17 }}>18-09-2022</Text>
-                            <Text style={{ fontSize: 17 }}>
-                                R$ {boleto.amount}
-                            </Text>
-                        </View>
+                        Nenhum pagamento realizado
+                    </Text>
+                )}
 
-                        <Text style={{ fontSize: 25 }}>{boleto.recipient}</Text>
-                    </TouchableOpacity>
-                ))}
-            {console.log(pagamentos)}
+                {render == true &&
+                    pagamentos.map((boleto) => (
+                        <TouchableOpacity
+                            style={{
+                                borderColor: "#000",
+                                borderWidth: 1,
+                                padding: 5,
+                                marginVertical: 5,
+                                backgroundColor: "#FFF",
+                            }}
+                            key={boleto.id}
+                        >
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    justifyContent: "space-between",
+                                    marginBottom: 10,
+                                }}
+                            >
+                                <Text style={{ fontSize: 17 }}>18-09-2022</Text>
+                                <Text style={{ fontSize: 17 }}>
+                                    R$ {boleto.amount}
+                                </Text>
+                            </View>
+
+                            <Text style={{ fontSize: 25 }}>
+                                {boleto.recipient}
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
+            </ScrollView>
         </SafeAreaView>
     );
 }
