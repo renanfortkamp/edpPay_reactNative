@@ -6,14 +6,14 @@ import {
     Dimensions,
     SafeAreaView,
     ScrollView,
+    Image
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { api } from "../Services/Service";
 import { CmStyle } from "../../Styles/CmStyle";
 import { useIsFocused } from "@react-navigation/native";
-import { isSearchBarAvailableForCurrentPlatform } from "react-native-screens";
-
+import barra from "../../imgs/barra.png";
 
 export default function Boletos() {
     const { width, height } = Dimensions.get("screen");
@@ -75,10 +75,18 @@ export default function Boletos() {
         <SafeAreaView
             style={{ ...CmStyle.conteiner, backgroundColor: "#212529" }}
         >
-            <Text style={{...CmStyle.greenColor, fontSize:30,fontWeight:"bold",alignSelf:'center', marginVertical:10}}>Boletos Pagos</Text>
+            <Text
+                style={{
+                    ...CmStyle.greenColor,
+                    fontSize: 30,
+                    fontWeight: "bold",
+                    alignSelf: "center",
+                    marginVertical: 10,
+                }}
+            >
+                Boletos Pagos
+            </Text>
             <ScrollView>
-                
-
                 {render == false && (
                     <Text
                         style={{
@@ -100,9 +108,14 @@ export default function Boletos() {
                                 padding: 5,
                                 marginVertical: 5,
                                 backgroundColor: "#FFF",
+                                width: "95%",
+                                alignSelf:"center"
                             }}
                             key={boleto.id}
                         >
+                            <Text style={{ fontSize: 25 }}>
+                                {boleto.recipient}
+                            </Text>
                             <View
                                 style={{
                                     flexDirection: "row",
@@ -110,15 +123,27 @@ export default function Boletos() {
                                     marginBottom: 10,
                                 }}
                             >
+                                
                                 <Text style={{ fontSize: 17 }}>18-09-2022</Text>
                                 <Text style={{ fontSize: 17 }}>
                                     R$ {boleto.amount}
                                 </Text>
                             </View>
 
-                            <Text style={{ fontSize: 25 }}>
-                                {boleto.recipient}
+                            
+                            <Text style={{ fontSize: 17,alignSelf:'center',fontWeight:'bold',letterSpacing:5,marginTop:10 }}>
+                                {boleto.code}
                             </Text>
+                            <Image
+                                style={{
+                                    ...styles.tinyLogo,
+                                    alignSelf: "center",
+                                    marginBottom:5,
+                                    marginTop:1,
+
+                                }}
+                                source={barra}
+                            />
                         </TouchableOpacity>
                     ))}
             </ScrollView>
@@ -126,4 +151,9 @@ export default function Boletos() {
     );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    tinyLogo: {
+        width: "100%",
+        height: 50,
+    },
+});
