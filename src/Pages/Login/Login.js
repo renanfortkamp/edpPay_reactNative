@@ -79,7 +79,7 @@ export default function Login({ navigation }) {
                 <TextInput
                     onChangeText={(text) => setCpf(text)}
                     placeholder="CPF"
-                    secureTextEntry={true}
+                    keyboardType="number-pad"
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
                 <TextInput
