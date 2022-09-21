@@ -36,7 +36,7 @@ export default function Detalhes({ navigation, route }) {
                 date: dateHora,
                 code: data[0].id,
                 userId: id[0],
-                cashback: (data[0].amount * 0.1).toFixed(2)*1,
+                cashback: (data[0].amount * 0.1).toFixed(2) * 1,
             }),
         })
             .then(() => {
@@ -44,7 +44,9 @@ export default function Detalhes({ navigation, route }) {
                 navigation.goBack();
             })
             .catch((error) => {
-                console.log("Erro ao pagar boleto:", error);
+                alert(
+                    "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
+                );
             });
     }
 
@@ -56,13 +58,13 @@ export default function Detalhes({ navigation, route }) {
                 justifyContent: "space-evenly",
             }}
         >
-            <Text>Detalhes</Text>
             <View
                 style={{
                     width: "80%",
                     height: "70%",
                     backgroundColor: "#fff",
                     alignSelf: "center",
+                    marginTop: 10,
                 }}
             >
                 {data.map((item) => (

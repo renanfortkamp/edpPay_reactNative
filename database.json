@@ -1,7 +1,53 @@
 {
   "users": [
+    {
+      "nome": "Reinaldo azevedo",
+      "telefone": "4899832590",
+      "email": "reinaldo@gmail.com",
+      "rg": "4856206",
+      "cpf": "01010101",
+      "password": "01010101",
+      "endereco": {
+        "cep": "88110500",
+        "rua": "Avenida Brasil",
+        "cidade": "São José",
+        "estado": "SC",
+        "bairro": "Bela Vista",
+        "numero": "050",
+        "complemento": ""
+      },
+      "dataCobranca": "2022-10-20",
+      "id": 1
+    }
   ],
   "invoices": [
+    {
+      "recipient": "DevInHouse Ltda",
+      "amount": 30.23,
+      "date": "20/09/2022 11:03PM",
+      "code": 545434326,
+      "userId": 1,
+      "cashback": 3.02,
+      "id": 1
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "20/09/2022 11:04PM",
+      "code": 1234534,
+      "userId": 1,
+      "cashback": 23.02,
+      "id": 2
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "20/09/2022 11:30PM",
+      "code": 1234534,
+      "userId": 1,
+      "cashback": 23.02,
+      "id": 3
+    }
   ],
   "debts": [
     {

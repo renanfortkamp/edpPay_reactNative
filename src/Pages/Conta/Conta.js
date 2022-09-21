@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View,TouchableOpacity,Dimensions,BackHandler,Alert } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Dimensions,
+    BackHandler,
+    Alert,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { BigHead } from "react-native-bigheads";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -6,26 +14,23 @@ import { api } from "../Services/Service";
 import { CmStyle } from "../../Styles/CmStyle";
 import { useIsFocused } from "@react-navigation/native";
 
-
-export default function Conta({navigation}) {
-    const {width,height} = Dimensions.get("screen")
+export default function Conta({ navigation }) {
+    const { width, height } = Dimensions.get("screen");
     const [id, setId] = useState("");
     const [user, setUser] = useState([]);
     const focused = useIsFocused();
 
-    function quitApp(){
-    //   navigation.navigate("Home")
-      Alert.alert("Atenção", "Você realmente deseja sair do app?", [
-        {
-          text: "Não",
-          onPress: () => null,
-          style: "cancel"
-        },
-        { text: "Sim", onPress: () => BackHandler.exitApp() }
-      ]);
+    function quitApp() {
+        Alert.alert("Atenção", "Você realmente deseja sair do app?", [
+            {
+                text: "Não",
+                onPress: () => null,
+                style: "cancel",
+            },
+            { text: "Sim", onPress: () => BackHandler.exitApp() },
+        ]);
     }
-    
-    
+
     const getId = async () => {
         const values = await AsyncStorage.getItem("@storage_Key");
         if (values != null) {
@@ -44,34 +49,58 @@ export default function Conta({navigation}) {
                 }
             })
             .catch((error) => {
-                console.log("Error ao recuperar usuario:", error);
+                alert(
+                    "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
+                );
             });
     }
 
     useEffect(() => {
-        getId();
+        if(user.length < 1){
+           getId();
+        }
     }, [focused]);
 
     return (
-        <View style={{ ...CmStyle.conteiner, alignItems: "center",justifyContent:'space-between' }}>
-            
-            <View style={{marginTop:30, alignItems:"center"}}>
-            <BigHead showBackground={true} size={width * 0.70} />
-            {console.log(BigHead)}
+        <View
+            style={{
+                ...CmStyle.conteiner,
+                alignItems: "center",
+                justifyContent: "space-between",
+            }}
+        >
+            <View style={{ marginTop: 30, alignItems: "center" }}>
+                <BigHead showBackground={true} size={width * 0.7} />
+                {console.log(BigHead)}
 
-            {user.map((dado) => (
-                <View style={{ alignItems: "center" }} key={dado.id}>
-                    <Text style={{ ...CmStyle.greenColor, fontSize: 30,textAlign:'center' }}>
-                        {dado.nome}
-                    </Text>
-                    <Text style={CmStyle.greenColor}>
-                        Telefone:{dado.telefone}
-                    </Text>
-                    <Text style={CmStyle.greenColor}>E-mail:{dado.email}</Text>
-                    <Text style={CmStyle.greenColor}>Rg:{dado.rg}</Text>
-                    <Text style={CmStyle.greenColor}>Cpf:{dado.cpf}</Text>
-                </View>
-            ))}
+                {user.map((dado) => (
+                    <View
+                        style={{ alignItems: "center", marginTop: 10 }}
+                        key={dado.id}
+                    >
+                        <Text
+                            style={{
+                                ...CmStyle.greenColor,
+                                fontSize: 35,
+                                textAlign: "center",
+                            }}
+                        >
+                            {dado.nome}
+                        </Text>
+                        <Text style={{ ...CmStyle.greenColor, fontSize: 20 }}>
+                            Telefone: {dado.telefone}
+                        </Text>
+                        <Text style={{ ...CmStyle.greenColor, fontSize: 20 }}>
+                            E-mail: {dado.email}
+                        </Text>
+                        <Text style={{ ...CmStyle.greenColor, fontSize: 20 }}>
+                            Rg: {dado.rg}
+                        </Text>
+                        <Text style={{ ...CmStyle.greenColor, fontSize: 20 }}>
+                            Cpf: {dado.cpf}
+                        </Text>
+                    </View>
+                ))}
             </View>
 
             <TouchableOpacity
@@ -80,7 +109,7 @@ export default function Conta({navigation}) {
                     ...CmStyle.button,
                     alignSelf: "center",
                     width: "45%",
-                    marginBottom:20
+                    marginBottom: 20,
                 }}
             >
                 <Text style={{ fontSize: 25, fontWeight: "bold" }}>

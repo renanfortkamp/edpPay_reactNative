@@ -14,7 +14,6 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { api } from "../Services/Service";
 import { CmStyle } from "../../Styles/CmStyle";
 import { useIsFocused } from "@react-navigation/native";
-import { setStatusBarStyle } from "expo-status-bar";
 
 export default function Pagamento({ navigation }) {
     const { width, height } = Dimensions.get("screen");
@@ -22,7 +21,7 @@ export default function Pagamento({ navigation }) {
     const [user, setUser] = useState([]);
     const [boleto, setBoleto] = useState("");
     const focused = useIsFocused();
-    const [scanOnOff, setScanOnOff] = useState("Desligar")
+    const [scanOnOff, setScanOnOff] = useState("Desligar Scanner");
 
     const getId = async () => {
         const values = await AsyncStorage.getItem("@storage_Key");
@@ -42,7 +41,9 @@ export default function Pagamento({ navigation }) {
                 }
             })
             .catch((error) => {
-                console.log("Error ao recuperar usuario:", error);
+                alert(
+                    "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
+                );;
             });
     }
 
@@ -52,14 +53,16 @@ export default function Pagamento({ navigation }) {
                 const data = await Response.json();
                 if (data.length === 1) {
                     setScanned(true);
-                    setScanOnOff("Ligar")
+                    setScanOnOff("Ligar Scanner");
                     navigation.navigate("Detalhes", { data: data, id });
                 } else {
                     Alert("Boleto não existe");
                 }
             })
             .catch((error) => {
-                console.log("Error ao recupear boleto:", error);
+                alert(
+                    "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
+                );
             });
     }
 
@@ -68,7 +71,9 @@ export default function Pagamento({ navigation }) {
     }, [boleto]);
 
     useEffect(() => {
-        getId();
+        if(user.length < 1){
+           getId();
+        }
     }, [focused]);
 
     const [hasPermission, setHasPermission] = useState(false);
@@ -76,7 +81,7 @@ export default function Pagamento({ navigation }) {
 
     const getPermission = async () => {
         const { status } = await BarCodeScanner.requestPermissionsAsync();
-        
+
         setHasPermission(status === "granted" ? true : false);
     };
 
@@ -92,21 +97,30 @@ export default function Pagamento({ navigation }) {
         if (scanned == true) {
             setScanned(false);
             getPermission();
-            setScanOnOff("Desligar")
+            setScanOnOff("Desligar Scanner");
         } else {
             setScanned(true);
-            setScanOnOff("Ligar")
+            setScanOnOff("Ligar Scanner");
         }
     }
     return (
-        <SafeAreaView style={{...CmStyle.conteiner, justifyContent: "center",alignItems:"center" }}>
+        <SafeAreaView
+            style={{
+                ...CmStyle.conteiner,
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
             {hasPermission === false && (
-                <Text>Permissão para câmera negada</Text>
+                <Text style={{...CmStyle.greenColor, fontSize:16}}>Permissão para câmera negada</Text>
             )}
 
             {hasPermission === true && scanned === false && (
-                <View style={{alignSelf:'center'}}>
+                <View style={{ alignSelf: "center" }}>
                     <BarCodeScanner
+                        barCodeTypes={[
+                            BarCodeScanner.Constants.BarCodeType.code39,
+                        ]}
                         onBarCodeScanned={getResult}
                         style={{
                             width: Dimensions.get("screen").width * 0.8,
@@ -114,17 +128,15 @@ export default function Pagamento({ navigation }) {
                         }}
                     />
                 </View>
-                
             )}
-            
 
             <TouchableOpacity
                 onPress={openCamera}
                 style={{
                     ...CmStyle.button,
                     alignSelf: "center",
-                    width: "45%",
-                    marginBottom:4
+                    width:'80%',
+                    marginBottom: 4,
                 }}
             >
                 <Text style={{ fontSize: 25, fontWeight: "bold" }}>

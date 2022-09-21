@@ -6,7 +6,7 @@ import {
     Dimensions,
     SafeAreaView,
     ScrollView,
-    Image
+    Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -41,7 +41,9 @@ export default function Boletos() {
                 }
             })
             .catch((error) => {
-                console.log("Error ao recuperar usuario:", error);
+                alert(
+                    "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
+                );;
             });
     }
 
@@ -56,7 +58,9 @@ export default function Boletos() {
                     }
                 })
                 .catch((error) => {
-                    console.log("error ao recupar pagamento: ", error);
+                    alert(
+                        "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
+                    );
                 });
         } catch (error) {
             console.log("erro no try:", error);
@@ -67,6 +71,7 @@ export default function Boletos() {
         getPagamentos();
     }, [user]);
 
+    
     useEffect(() => {
         setRender(false);
         getId();
@@ -93,15 +98,17 @@ export default function Boletos() {
                             ...CmStyle.greenColor,
                             alignSelf: "center",
                             fontSize: 20,
+                            textAlign: "center",
+                            padding: 20,
                         }}
                     >
-                        Nenhum pagamento realizado
+                        Nenhum pagamento realizado ou ainda não foi processado.
                     </Text>
                 )}
 
                 {render == true &&
                     pagamentos.map((boleto) => (
-                        <TouchableOpacity
+                        <View
                             style={{
                                 borderColor: "#000",
                                 borderWidth: 1,
@@ -109,11 +116,11 @@ export default function Boletos() {
                                 marginVertical: 5,
                                 backgroundColor: "#FFF",
                                 width: "95%",
-                                alignSelf:"center"
+                                alignSelf: "center",
                             }}
                             key={boleto.id}
                         >
-                            <Text style={{ fontSize: 25 }}>
+                            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
                                 {boleto.recipient}
                             </Text>
                             <View
@@ -121,30 +128,47 @@ export default function Boletos() {
                                     flexDirection: "row",
                                     justifyContent: "space-between",
                                     marginBottom: 10,
+                                    alignItems: "center",
+                                    marginTop: 10,
                                 }}
                             >
-                                
-                                <Text style={{ fontSize: 17 }}>18-09-2022</Text>
                                 <Text style={{ fontSize: 17 }}>
+                                    {boleto.date}
+                                </Text>
+                                <Text
+                                    style={{ fontSize: 25, fontWeight: "bold" }}
+                                >
                                     R$ {boleto.amount}
                                 </Text>
                             </View>
 
-                            
-                            <Text style={{ fontSize: 17,alignSelf:'center',fontWeight:'bold',letterSpacing:5,marginTop:10 }}>
+                            <Text
+                                style={{ ...CmStyle.greenColor, fontSize: 17 }}
+                            >
+                                Cashback: R$ {boleto.cashback}
+                            </Text>
+
+                            <Text
+                                style={{
+                                    fontSize: 17,
+                                    alignSelf: "center",
+                                    fontWeight: "bold",
+                                    letterSpacing: 5,
+                                    marginTop: 10,
+                                }}
+                            >
                                 {boleto.code}
                             </Text>
                             <Image
                                 style={{
                                     ...styles.tinyLogo,
                                     alignSelf: "center",
-                                    marginBottom:5,
-                                    marginTop:1,
-
+                                    marginBottom: 5,
+                                    marginTop: 1,
                                 }}
                                 source={barra}
                             />
-                        </TouchableOpacity>
+                        </View>
                     ))}
             </ScrollView>
         </SafeAreaView>

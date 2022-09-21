@@ -3,7 +3,6 @@ import {
     StyleSheet,
     Text,
     View,
-    TextInput,
     ScrollView,
     TouchableOpacity,
     Switch,
@@ -22,7 +21,7 @@ export default function Terms({ navigation, route }) {
     }
     function navigateToLogin() {
         if(isEnabled == false){
-            alert("Para continuar é necessario aceitar os termos de uso")
+            alert("Para finalizar cadastro é necessario aceitar os termos de uso!")
         }else{
             
         fetch(api + "/users",{
@@ -36,7 +35,10 @@ export default function Terms({ navigation, route }) {
             alert("Usuario cadastrado com sucesso!")
             navigation.navigate("Login");}
         )
-        .catch((error)=>{console.log("Usuario não cadastrado erro:", error)})
+        .catch((error)=>{alert(
+            "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
+            
+        );})
         }
     }
     return (
@@ -56,6 +58,7 @@ export default function Terms({ navigation, route }) {
                                 fontSize: 40,
                                 marginVertical: 20,
                                 alignSelf: "center",
+                                fontWeight:'bold'
                             }}
                         >
                             Termos de Uso
@@ -110,7 +113,7 @@ export default function Terms({ navigation, route }) {
                                 value={isEnabled}
                             />
                             <Text
-                                style={{ ...CmStyle.greenColor,color:"#28ff52", fontSize: 25 }}
+                                style={{ ...CmStyle.greenColor,color:"#28ff52", marginLeft:10, fontSize: 25 }}
                             >
                                 Aceito termos
                             </Text>
@@ -128,7 +131,7 @@ export default function Terms({ navigation, route }) {
                                 style={{
                                     ...CmStyle.button,
                                     alignSelf: "center",
-                                    width: "45%",
+                                    width: "47%",
                                 }}
                             >
                                 <Text
@@ -142,7 +145,7 @@ export default function Terms({ navigation, route }) {
                                 style={{
                                     ...CmStyle.button,
                                     alignSelf: "center",
-                                    width: "45%",
+                                    width: "47%",
                                 }}
                             >
                                 <Text
