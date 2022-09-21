@@ -15,38 +15,44 @@ import { CmStyle } from "../../Styles/CmStyle";
 export default function Endereco({ navigation, route }) {
     const [cep, setCep] = useState("");
     const [rua, setRua] = useState("");
+    const [placeRua, setPlaceRua] = useState("");
     const [cidade, setCidade] = useState("");
+    const [placeCidade, setPlaceCidade] = useState("");
     const [estado, setEstado] = useState("");
     const [bairro, setBairro] = useState("");
+    const [placeBairro, setPlaceBairro] = useState("");
     const [numero, setNumero] = useState("");
     const [complemento, setComplemento] = useState("");
-   
-    const { user } = route.params;
-    
-    console.log(user);
 
-    useEffect(()=>{
-        if(cep.length == 8){
-            fetch("https://viacep.com.br/ws/"+ cep +"/json/")
-            .then(async (response)=>{
-                const data = await response.json()
-                
-                setRua(data.logradouro)
-                setCidade(data.localidade)
-                setEstado(data.uf)
-                setBairro(data.bairro)
-                setComplemento(data.complemento)
-            })
-            .catch((error)=>{console.log(error)})
+    const { user } = route.params;
+
+    useEffect(() => {
+        if (cep.length == 8) {
+            fetch("https://viacep.com.br/ws/" + cep + "/json/")
+                .then(async (response) => {
+                    const data = await response.json();
+                    setPlaceRua(data.logradouro);
+                    setPlaceCidade(data.localidade);
+                    setPlaceBairro(data.bairro);
+                    setRua(data.logradouro);
+                    setCidade(data.localidade);
+                    setEstado(data.uf);
+                    setBairro(data.bairro);
+                })
+                .catch((error) => {
+                    alert(
+                        "Nossos servidores estão indisponiveis, tente novamente mais tarde!",
+                        error
+                    );
+                });
         }
-    },[cep])
+    }, [cep]);
 
     function navigationToNovaConta() {
         navigation.goBack();
     }
 
     function navigateToData() {
-
         if (cep.length != 8) {
             alert("Digite um cep valido com 8 digitos");
         } else if (!rua) {
@@ -60,18 +66,22 @@ export default function Endereco({ navigation, route }) {
         } else if (!numero) {
             alert("Digite numero de sua moradia");
         } else {
-
-        navigation.navigate("DataCobranca", {dados:{...user,
-            endereco: {
-                cep: cep,
-                rua: rua,
-                cidade: cidade,
-                estado: estado,
-                bairro: bairro,
-                numero,
-                numero,
-                complemento: complemento,
-            },}});}
+            navigation.navigate("DataCobranca", {
+                dados: {
+                    ...user,
+                    endereco: {
+                        cep: cep,
+                        rua: rua,
+                        cidade: cidade,
+                        estado: estado,
+                        bairro: bairro,
+                        numero,
+                        numero,
+                        complemento: complemento,
+                    },
+                },
+            });
+        }
     }
 
     return (
@@ -91,6 +101,7 @@ export default function Endereco({ navigation, route }) {
                                 fontSize: 40,
                                 marginVertical: 20,
                                 alignSelf: "center",
+                                fontWeight: "bold",
                             }}
                         >
                             Endereço
@@ -106,7 +117,6 @@ export default function Endereco({ navigation, route }) {
                             CEP
                         </Text>
                         <TextInput
-                            
                             onChangeText={(text) => setCep(text)}
                             keyboardType="number-pad"
                             style={{ ...CmStyle.input, fontSize: 20 }}
@@ -122,7 +132,7 @@ export default function Endereco({ navigation, route }) {
                             Rua
                         </Text>
                         <TextInput
-                            placeholder={rua}
+                            placeholder={placeRua}
                             onChangeText={(text) => setRua(text)}
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
@@ -137,7 +147,7 @@ export default function Endereco({ navigation, route }) {
                             Cidade
                         </Text>
                         <TextInput
-                            placeholder={cidade}
+                            placeholder={placeCidade}
                             onChangeText={(text) => setCidade(text)}
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
@@ -206,7 +216,7 @@ export default function Endereco({ navigation, route }) {
                             Bairro
                         </Text>
                         <TextInput
-                        placeholder={bairro}
+                            placeholder={placeBairro}
                             onChangeText={(text) => setBairro(text)}
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
@@ -236,7 +246,6 @@ export default function Endereco({ navigation, route }) {
                             Complemento
                         </Text>
                         <TextInput
-                        placeholder={complemento}
                             onChangeText={(text) => setComplemento(text)}
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />

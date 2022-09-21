@@ -113,6 +113,7 @@ export default function SingUp({ navigation }) {
                         <TextInput
                             onChangeText={(text) => setEmail(text)}
                             keyboardType="email-address"
+                            autoCapitalize="none"
                             style={{ ...CmStyle.input, fontSize: 20 }}
                         />
 
