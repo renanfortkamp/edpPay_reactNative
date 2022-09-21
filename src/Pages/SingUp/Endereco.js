@@ -261,7 +261,7 @@ export default function Endereco({ navigation, route }) {
                                 style={{
                                     ...CmStyle.button,
                                     alignSelf: "center",
-                                    width: "45%",
+                                    width: "47%",
                                 }}
                             >
                                 <Text
@@ -275,7 +275,7 @@ export default function Endereco({ navigation, route }) {
                                 style={{
                                     ...CmStyle.button,
                                     alignSelf: "center",
-                                    width: "45%",
+                                    width: "47%",
                                 }}
                             >
                                 <Text

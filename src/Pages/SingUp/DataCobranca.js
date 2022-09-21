@@ -51,7 +51,7 @@ export default function DataCobranca({ navigation, route }) {
                         <Text
                             style={{
                                 ...CmStyle.greenColor,
-                                fontSize: 40,
+                                fontSize: 30,
                                 marginVertical: 20,
                                 alignSelf: "center",
                             }}
@@ -60,8 +60,7 @@ export default function DataCobranca({ navigation, route }) {
                         </Text>
                         <View style={{ backgroundColor: "#fff", padding: 20 }}>
                             <CalendarPicker
-                                // selectedStartDate={"2022-09-25"}
-                                width={width - 50}
+                                width={width * 0.84}
                                 onDateChange={setDataCobranca}
                             />
                         </View>
@@ -78,7 +77,7 @@ export default function DataCobranca({ navigation, route }) {
                                 style={{
                                     ...CmStyle.button,
                                     alignSelf: "center",
-                                    width: "45%",
+                                    width: "47%",
                                 }}
                             >
                                 <Text
@@ -92,7 +91,7 @@ export default function DataCobranca({ navigation, route }) {
                                 style={{
                                     ...CmStyle.button,
                                     alignSelf: "center",
-                                    width: "45%",
+                                    width: "47%",
                                 }}
                             >
                                 <Text
