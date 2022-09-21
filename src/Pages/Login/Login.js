@@ -6,6 +6,7 @@ import {
     ImageBackground,
     TouchableOpacity,
     TextInput,
+    Dimensions
 } from "react-native";
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -15,6 +16,7 @@ import { api } from "../Services/Service";
 export default function Login({ navigation }) {
     const [cpf, setCpf] = useState("");
     const [password, setPassword] = useState("");
+    const {height,width} = Dimensions.get("screen")
 
     function navigateToSingUp() {
         navigation.navigate("SingUp");
@@ -22,9 +24,9 @@ export default function Login({ navigation }) {
 
     function login() {
         if (!cpf) {
-            alert("Digite seu cpf")
+            alert("Para entrar digite seu CPF");
         } else if (!password) {
-            alert("Digite sua senha ")
+            alert("Para entrar digite seu Password");
         } else {
             fetch(api + "/users?cpf=" + cpf + "&password=" + password)
                 .then(async (Response) => {
@@ -32,9 +34,11 @@ export default function Login({ navigation }) {
                     if (data.length === 1) {
                         const userId = data[0].id;
                         saveId(userId);
-                    } else alert("Cpf ou Senha invalido");
+                    } else alert("Cpf ou Senha incorreto, ou talvez você não tenha uma conta.");
                 })
-                .catch((error) => {console.log("Error ao logar:", error)});
+                .catch((error) => {
+                    alert("Nossos servidores estão indisponiveis, tente novamente mais tarde!");
+                });
         }
     }
 
@@ -46,7 +50,7 @@ export default function Login({ navigation }) {
             );
             navigation.navigate("conta");
         } catch (error) {
-            alert("Houve um erro ao salvar");
+            alert("Houve erro ao salvar alguns dados no seu armazenamento, tente novamente após apagar algum dado de seu telefone");
         }
     }
 
@@ -80,7 +84,7 @@ export default function Login({ navigation }) {
                 />
                 <TextInput
                     onChangeText={(text) => setPassword(text)}
-                    placeholder="SENHA"
+                    placeholder="Password"
                     secureTextEntry={true}
                     style={{ ...CmStyle.input, fontSize: 20 }}
                 />
@@ -96,18 +100,13 @@ export default function Login({ navigation }) {
                         Entrar
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ alignSelf: "center", marginTop: 5 }}>
-                    <Text style={{ color: "#fff", fontSize: 15 }}>
-                        Esqueci minha senha
-                    </Text>
-                </TouchableOpacity>
             </View>
 
             <TouchableOpacity
                 onPress={navigateToSingUp}
-                style={{ marginBottom: 20 }}
+                style={{ marginBottom: 10 }}
             >
-                <Text style={{ ...CmStyle.greenColor, fontSize: 25 }}>
+                <Text style={{ ...CmStyle.greenColor, fontSize: 25, marginTop:30 }}>
                     Abrir conta gratuita
                 </Text>
             </TouchableOpacity>

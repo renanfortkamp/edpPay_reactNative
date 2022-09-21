@@ -1,4 +1,7 @@
 import { StyleSheet } from 'react-native'
+import { Dimensions } from 'react-native';
+
+const {height,width}= Dimensions.get("screen")
 
 export const CmStyle = StyleSheet.create({
     conteiner: {
@@ -24,8 +27,10 @@ export const CmStyle = StyleSheet.create({
         position: "absolute",
     },
     logoEdpCom: {
-        width: 350,
-        height: 250,
+        // width: 350,
+        // height: 250,
+        width: width * 0.9,
+        height: height * 0.28,
     },
     greenColor:{
         color: "#28ff52",
@@ -39,7 +44,7 @@ export const CmStyle = StyleSheet.create({
         height: 60,
         backgroundColor:'#fff',
         marginVertical:5,
-        paddingLeft:5,
+        paddingLeft:10,
         borderRadius:10,
     },
 });
