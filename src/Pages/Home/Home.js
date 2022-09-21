@@ -3,20 +3,18 @@ import {
     Text,
     View,
     SafeAreaView,
-    Image,
     TouchableOpacity,
-    TextInput,
     ImageBackground,
     StatusBar,
-    Dimensions
+    Dimensions,
 } from "react-native";
 import LottieView from "lottie-react-native";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Qrimg from "../../imgs/94946-qr-scanner.json";
 
-const {height,width} = Dimensions.get("screen")
+const { height, width } = Dimensions.get("screen");
 
 import { CmStyle } from "../../Styles/CmStyle";
 
@@ -32,21 +30,27 @@ export default function Home({ navigation }) {
     return (
         <SafeAreaView style={{ ...CmStyle.conteiner, alignItems: "center" }}>
             <StatusBar />
-            <View style={{width:width,height:170,justifyContent:"center",alignItems:"center"}}>
-            <LottieView
-                autoPlay
+            <View
                 style={{
-                    marginTop:15,
-                    width: 350
-                                        
+                    width: width,
+                    height: height * 0.23,
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}
-                source={Qrimg}
-            />
+            >
+                <LottieView
+                    autoPlay
+                    style={{
+                        marginTop: 15,
+                        width: width * 0.9,
+                    }}
+                    source={Qrimg}
+                />
             </View>
-            
+
             <View>
                 <ImageBackground
-                    style={{ ...CmStyle.logoEdpCom, alignSelf: "center"}}
+                    style={{ ...CmStyle.logoEdpCom, alignSelf: "center" }}
                     resizeMode="contain"
                     source={require("../../imgs/logo.png")}
                 ></ImageBackground>
