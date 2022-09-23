@@ -65,7 +65,7 @@ export default function Terms({ navigation, route }) {
                         </Text>
                         <Text
                             style={{
-                                ...CmStyle.greenColor,
+                                color:"#fff",
                                 fontSize: 20,
                                 marginBottom: 3,
                                 textAlign: "center",

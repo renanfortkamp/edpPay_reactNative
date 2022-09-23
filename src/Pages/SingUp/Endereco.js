@@ -41,8 +41,8 @@ export default function Endereco({ navigation, route }) {
                 })
                 .catch((error) => {
                     alert(
-                        "Nossos servidores estão indisponiveis, tente novamente mais tarde!",
-                        error
+                        "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
+                        
                     );
                 });
         }

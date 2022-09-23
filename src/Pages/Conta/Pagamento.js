@@ -36,7 +36,7 @@ export default function Pagamento({ navigation }) {
         fetch(api + "/users?id=" + idParse)
             .then(async (Response) => {
                 const data = await Response.json();
-                if (data.length === 1) {
+                if (data.length > 0) {
                     setUser(data);
                 }
             })
@@ -51,7 +51,7 @@ export default function Pagamento({ navigation }) {
         fetch(api + "/debts?id=" + boleto)
             .then(async (Response) => {
                 const data = await Response.json();
-                if (data.length === 1) {
+                if (data.length > 0) {
                     setScanned(true);
                     setScanOnOff("Ligar Scanner");
                     navigation.navigate("Detalhes", { data: data, id });
@@ -59,11 +59,7 @@ export default function Pagamento({ navigation }) {
                     Alert("Boleto não existe");
                 }
             })
-            .catch((error) => {
-                alert(
-                    "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
-                );
-            });
+            .catch((error)=>{console.log("erro ao recuperar boleto",error)});
     }
 
     useEffect(() => {

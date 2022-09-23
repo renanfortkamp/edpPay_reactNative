@@ -18,6 +18,25 @@
       },
       "dataCobranca": "2022-10-20",
       "id": 1
+    },
+    {
+      "nome": "Joao ribeiro ",
+      "telefone": "489989589",
+      "email": "joao@hotmail.com",
+      "rg": "5428658",
+      "cpf": "333",
+      "password": "33333333",
+      "endereco": {
+        "cep": "88130750",
+        "rua": "Rua Frei Lauro",
+        "cidade": "Palhoça",
+        "estado": "SC",
+        "bairro": "Ponte do Imaruim",
+        "numero": "85",
+        "complemento": ""
+      },
+      "dataCobranca": "2022-09-28",
+      "id": 2
     }
   ],
   "invoices": [
@@ -47,6 +66,42 @@
       "userId": 1,
       "cashback": 23.02,
       "id": 3
+    },
+    {
+      "recipient": "DevInHouse Ltda",
+      "amount": 30.23,
+      "date": "22/09/2022 10:32PM",
+      "code": 545434326,
+      "userId": 2,
+      "cashback": 3.02,
+      "id": 4
+    },
+    {
+      "recipient": "DevInHouse Ltda",
+      "amount": 30.23,
+      "date": "22/09/2022 10:37PM",
+      "code": 545434326,
+      "userId": 2,
+      "cashback": 3.02,
+      "id": 5
+    },
+    {
+      "recipient": "DevInHouse Ltda",
+      "amount": 30.23,
+      "date": "22/09/2022 10:40PM",
+      "code": 545434326,
+      "userId": 2,
+      "cashback": 3.02,
+      "id": 6
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "22/09/2022 11:23PM",
+      "code": 1234534,
+      "userId": 2,
+      "cashback": 23.02,
+      "id": 7
     }
   ],
   "debts": [

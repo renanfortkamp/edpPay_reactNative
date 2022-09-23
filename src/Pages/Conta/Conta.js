@@ -41,7 +41,7 @@ export default function Conta({ navigation }) {
     };
 
     function getUser(idParse) {
-        fetch(api + "/users?id=" + idParse)
+        fetch(api + "/users?id=" + id)
             .then(async (Response) => {
                 const data = await Response.json();
                 if (data.length === 1) {
@@ -56,8 +56,12 @@ export default function Conta({ navigation }) {
     }
 
     useEffect(() => {
-        if(user.length < 1){
-           getId();
+        
+        if (id.length > 0 && user.length < 1) {
+            getUser();
+        }
+        if (id.length < 1) {
+            getId();
         }
     }, [focused]);
 
@@ -80,23 +84,23 @@ export default function Conta({ navigation }) {
                     >
                         <Text
                             style={{
-                                ...CmStyle.greenColor,
+                                color: "#fff",
                                 fontSize: 35,
                                 textAlign: "center",
                             }}
                         >
                             {dado.nome}
                         </Text>
-                        <Text style={{ ...CmStyle.greenColor, fontSize: 20 }}>
+                        <Text style={{ color: "#fff", fontSize: 20 }}>
                             Telefone: {dado.telefone}
                         </Text>
-                        <Text style={{ ...CmStyle.greenColor, fontSize: 20 }}>
+                        <Text style={{ color: "#fff", fontSize: 20 }}>
                             E-mail: {dado.email}
                         </Text>
-                        <Text style={{ ...CmStyle.greenColor, fontSize: 20 }}>
+                        <Text style={{ color: "#fff", fontSize: 20 }}>
                             Rg: {dado.rg}
                         </Text>
-                        <Text style={{ ...CmStyle.greenColor, fontSize: 20 }}>
+                        <Text style={{ color: "#fff", fontSize: 20 }}>
                             Cpf: {dado.cpf}
                         </Text>
                     </View>
