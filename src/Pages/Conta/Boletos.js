@@ -18,7 +18,6 @@ import barra from "../../imgs/barra.png";
 export default function Boletos() {
     const { width, height } = Dimensions.get("screen");
     const [id, setId] = useState("");
-    const [user, setUser] = useState([]);
     const [pagamentos, setPagamentos] = useState([]);
     const [render, setRender] = useState(false);
     const focused = useIsFocused();
@@ -28,24 +27,8 @@ export default function Boletos() {
         if (values != null) {
             const idParse = JSON.parse(values);
             setId(idParse);
-            getUser(idParse);
         }
     };
-
-    function getUser(idParse) {
-        fetch(api + "/users?id=" + idParse)
-            .then(async (Response) => {
-                const data = await Response.json();
-                if (data.length === 1) {
-                    setUser(data);
-                }
-            })
-            .catch((error) => {
-                alert(
-                    "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
-                );;
-            });
-    }
 
     function getPagamentos() {
         try {
@@ -68,13 +51,18 @@ export default function Boletos() {
     }
 
     useEffect(() => {
-        getPagamentos();
-    }, [user]);
+        if(id){
+            getPagamentos();
+        }
+        
+    }, [focused]);
 
     
     useEffect(() => {
         setRender(false);
-        getId();
+        if(!id){
+            getId();
+        }
     }, [focused]);
     return (
         <SafeAreaView
@@ -111,7 +99,7 @@ export default function Boletos() {
                         <View
                             style={{
                                 borderColor: "#000",
-                                borderWidth: 1,
+                                borderWidth: 3,
                                 padding: 5,
                                 marginVertical: 5,
                                 backgroundColor: "#FFF",
@@ -120,7 +108,7 @@ export default function Boletos() {
                             }}
                             key={boleto.id}
                         >
-                            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+                            <Text style={{ fontSize: 25, fontWeight: "bold",backgroundColor:"#fff",borderColor:"#000",borderWidth:2,textAlign:"center" }}>
                                 {boleto.recipient}
                             </Text>
                             <View
@@ -143,7 +131,7 @@ export default function Boletos() {
                             </View>
 
                             <Text
-                                style={{ ...CmStyle.greenColor, fontSize: 17 }}
+                                style={{fontSize: 17 }}
                             >
                                 Cashback: R$ {boleto.cashback}
                             </Text>
