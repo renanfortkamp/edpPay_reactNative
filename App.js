@@ -86,18 +86,26 @@ function SingUpNavigator() {
 function ContaNavigator() {
     return (
         <Tab.Navigator
-            tabBarOptions={{
-                activeTintColor: "#000",
-                inactiveTintColor: "#262626",
-                activeBackgroundColor: "#00f530",
-                inactiveBackgroundColor: "#28ff52",
+            // screenOptions={({ route }) => ({
+            //         tabBarOptions:{{
+            //             activeTintColor: "#000",
+            //             inactiveTintColor: "#262626",
+            //             activeBackgroundColor: "#00f530",
+            //             inactiveBackgroundColor: "#fff",
+            //         }}
+            // })}
+
+            screenOptions={{
+                tabBarStyle: {
+                    backgroundColor: "#fff",
+                },
             }}
             initialRouteName="conta"
         >
             <Tab.Screen
-            
                 options={{
-                    
+                    tabBarActiveTintColor: "#000",
+                    tabBarActiveBackgroundColor: "#28ff52",
                     headerShown: false,
                     tabBarIcon: () => (
                         <Icon name="account-box" color={"#000"} size={30} />
@@ -108,6 +116,9 @@ function ContaNavigator() {
             />
             <Tab.Screen
                 options={{
+                    tabBarActiveTintColor: "#000",
+                    tabBarActiveBackgroundColor: "#28ff52",
+
                     headerShown: false,
                     tabBarIcon: () => (
                         <Icon name="barcode-scan" color={"#000"} size={30} />
@@ -118,6 +129,8 @@ function ContaNavigator() {
             />
             <Tab.Screen
                 options={{
+                    tabBarActiveTintColor: "#000",
+                    tabBarActiveBackgroundColor: "#28ff52",
                     headerShown: false,
                     tabBarIcon: () => (
                         <Icon
