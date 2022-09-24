@@ -12,7 +12,7 @@ export const CmStyle = StyleSheet.create({
         marginTop: 20,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 0,
+        borderRadius: 5,
         width: "90%",
         height: 60,
         backgroundColor: "#28ff52",
@@ -33,7 +33,7 @@ export const CmStyle = StyleSheet.create({
         height: height * 0.28,
     },
     greenColor:{
-        color: "#fff",
+        color:"#28ff52",
     },
     blackGround:{
         backgroundColor: "#212529",
@@ -43,8 +43,8 @@ export const CmStyle = StyleSheet.create({
         width: '100%',
         height: 60,
         backgroundColor:'#fff',
-        borderColor:"#fff",
-        borderWidth:3,
+        borderColor:"#28ff52",
+        borderWidth:0.3,
         marginVertical:5,
         paddingLeft:10,
         borderRadius:0,

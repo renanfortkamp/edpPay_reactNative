@@ -70,7 +70,7 @@ export default function Boletos() {
         >
             <Text
                 style={{
-                    ...CmStyle.greenColor,
+                    color:"#28ff52",
                     fontSize: 30,
                     fontWeight: "bold",
                     alignSelf: "center",
@@ -83,7 +83,7 @@ export default function Boletos() {
                 {render == false && (
                     <Text
                         style={{
-                            ...CmStyle.greenColor,
+                            color:"#fff",
                             alignSelf: "center",
                             fontSize: 20,
                             textAlign: "center",

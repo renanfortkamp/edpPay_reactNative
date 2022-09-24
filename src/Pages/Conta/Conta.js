@@ -16,7 +16,6 @@ import { useIsFocused } from "@react-navigation/native";
 
 export default function Conta({ navigation }) {
     const { width, height } = Dimensions.get("screen");
-    const [id, setId] = useState("");
     const [user, setUser] = useState([]);
     const focused = useIsFocused();
 
@@ -34,13 +33,12 @@ export default function Conta({ navigation }) {
     const getId = async () => {
         const values = await AsyncStorage.getItem("@storage_Key");
         if (values != null) {
-            const idParse = JSON.parse(values);
-            setId(idParse);
-            getUser(idParse);
+            const id = JSON.parse(values);
+            getUser(id);
         }
     };
 
-    function getUser(idParse) {
+    function getUser(id) {
         fetch(api + "/users?id=" + id)
             .then(async (Response) => {
                 const data = await Response.json();
@@ -56,14 +54,8 @@ export default function Conta({ navigation }) {
     }
 
     useEffect(() => {
-        
-        if (id.length > 0 && user.length < 1) {
-            getUser();
-        }
-        if (id.length < 1) {
-            getId();
-        }
-    }, [focused]);
+        getId();
+    }, []);
 
     return (
         <View
@@ -73,36 +65,106 @@ export default function Conta({ navigation }) {
                 justifyContent: "space-between",
             }}
         >
-            <View style={{ marginTop: 30, alignItems: "center" }}>
-                <BigHead showBackground={true} size={width * 0.7} />
-                {console.log(BigHead)}
+            <View style={{ marginTop: 3, alignItems: "center" }}>
+                <BigHead showBackground={true} size={width * 0.6} />
 
                 {user.map((dado) => (
                     <View
-                        style={{ alignItems: "center", marginTop: 10 }}
+                        style={{
+                            marginTop: 10,
+                            alignSelf: "center",
+                            width:"95%"
+                        }}
                         key={dado.id}
                     >
                         <Text
                             style={{
-                                color: "#fff",
+                                color: "#28ff52",
                                 fontSize: 35,
                                 textAlign: "center",
+                                marginBottom: 5,
+                                fontWeight:"bold"
                             }}
                         >
                             {dado.nome}
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 20 }}>
-                            Telefone: {dado.telefone}
-                        </Text>
-                        <Text style={{ color: "#fff", fontSize: 20 }}>
-                            E-mail: {dado.email}
-                        </Text>
-                        <Text style={{ color: "#fff", fontSize: 20 }}>
-                            Rg: {dado.rg}
-                        </Text>
-                        <Text style={{ color: "#fff", fontSize: 20 }}>
-                            Cpf: {dado.cpf}
-                        </Text>
+                        
+                        <View
+                        style={{alignItems:"center"}}
+                        >
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    fontSize: 20,
+                                }}
+                            >
+                                Telefone: {dado.telefone}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    
+                                    fontSize: 20,
+                                }}
+                            >
+                                E-mail: {dado.email}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    
+                                    fontSize: 20,
+                                }}
+                            >
+                                Rg: {dado.rg}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    
+                                    fontSize: 20,
+                                }}
+                            >
+                                Cpf: {dado.cpf}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    
+                                    fontSize: 20,
+                                }}
+                            >
+                                Cep: {dado.endereco.cep}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    
+                                    fontSize: 20,
+                                }}
+                            >
+                                Rua: {dado.endereco.rua}- Nº{dado.endereco.numero}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    
+                                    fontSize: 20,
+                                }}
+                            >
+                                Bairro: {dado.endereco.bairro}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    
+                                    fontSize: 20,
+                                }}
+                            >
+                                Cidade: {dado.endereco.cidade}-{dado.endereco.estado}
+                            </Text>
+                            
+                        </View>
                     </View>
                 ))}
             </View>

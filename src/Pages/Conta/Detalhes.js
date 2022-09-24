@@ -9,7 +9,6 @@ import {
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import React from "react";
-import { useIsFocused } from "@react-navigation/native";
 import { CmStyle } from "../../Styles/CmStyle";
 import barra from "../../imgs/barra.png";
 import { api } from "../Services/Service";
@@ -41,7 +40,8 @@ export default function Detalhes({ navigation, route }) {
         })
             .then(() => {
                 alert("Boleto pago com sucesso!");
-                navigation.goBack();
+                // navigation.goBack();
+                navigation.navigate("Boletos")
             })
             .catch((error) => {
                 alert(

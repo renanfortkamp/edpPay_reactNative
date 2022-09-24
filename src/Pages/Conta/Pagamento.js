@@ -14,6 +14,8 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { api } from "../Services/Service";
 import { CmStyle } from "../../Styles/CmStyle";
 import { useIsFocused } from "@react-navigation/native";
+import LottieView from "lottie-react-native";
+import scanner from "../../imgs/scanner.json";
 
 export default function Pagamento({ navigation }) {
     const { width, height } = Dimensions.get("screen");
@@ -21,7 +23,8 @@ export default function Pagamento({ navigation }) {
     const [user, setUser] = useState([]);
     const [boleto, setBoleto] = useState("");
     const focused = useIsFocused();
-    const [scanOnOff, setScanOnOff] = useState("Desligar Scanner");
+    const [scanOnOff, setScanOnOff] = useState("Ligar Scanner");
+    const [openClosed, setOpenClosed] = useState(false);
 
     const getId = async () => {
         const values = await AsyncStorage.getItem("@storage_Key");
@@ -43,7 +46,7 @@ export default function Pagamento({ navigation }) {
             .catch((error) => {
                 alert(
                     "Nossos servidores estão indisponiveis, tente novamente mais tarde!"
-                );;
+                );
             });
     }
 
@@ -59,7 +62,9 @@ export default function Pagamento({ navigation }) {
                     Alert("Boleto não existe");
                 }
             })
-            .catch((error)=>{console.log("erro ao recuperar boleto",error)});
+            .catch((error) => {
+                console.log("erro ao recuperar boleto", error);
+            });
     }
 
     useEffect(() => {
@@ -67,9 +72,12 @@ export default function Pagamento({ navigation }) {
     }, [boleto]);
 
     useEffect(() => {
-        if(user.length < 1){
-           getId();
+        if (user.length < 1) {
+            getId();
         }
+        setScanned(true);
+        setScanOnOff("Ligar Scanner");
+        setOpenClosed(false);
     }, [focused]);
 
     const [hasPermission, setHasPermission] = useState(false);
@@ -81,46 +89,80 @@ export default function Pagamento({ navigation }) {
         setHasPermission(status === "granted" ? true : false);
     };
 
-    useEffect(() => {
-        getPermission();
-    }, []);
-
     function getResult({ data }) {
         setBoleto(data);
     }
 
     function openCamera() {
-        if (scanned == true) {
+        if (scanned == true && openClosed == false) {
             setScanned(false);
             getPermission();
             setScanOnOff("Desligar Scanner");
+            setOpenClosed(true);
         } else {
             setScanned(true);
             setScanOnOff("Ligar Scanner");
+            setOpenClosed(false);
         }
     }
     return (
         <SafeAreaView
             style={{
                 ...CmStyle.conteiner,
-                justifyContent: "center",
+                justifyContent: "space-between",
                 alignItems: "center",
             }}
         >
-            {hasPermission === false && (
-                <Text style={{...CmStyle.greenColor, fontSize:16}}>Permissão para câmera negada</Text>
+            {user.length > 0 && (
+                <Text
+                    style={{
+                        color: "#28ff52",
+                        fontSize: 30,
+                        fontWeight: "bold",
+                        alignSelf: "center",
+                        marginTop: 10,
+                    }}
+                >
+                    Olá!, {user[0].nome}
+                </Text>
             )}
+            {/* {hasPermission === false && (
+                <Text style={{...CmStyle.greenColor, fontSize:16}}>Permissão para câmera negada</Text>
+            )} */}
+            {/* <LottieView
+                autoPlay
+                style={{
+                    position: "absolute",
+                    width: 700,
+                    height: Dimensions.get("screen").height * 0.1,
+                }}
+                source={scanner}
+            ></LottieView> */}
+            {hasPermission === true && scanned === false && openClosed == true && (
+                <View
+                    style={{
+                        alignSelf: "center",
+                        borderColor: "#fff",
+                        borderWidth: 0.2,
+                        shadowColor: "#fff",
+                        shadowOffset: {
+                            width: 5,
+                            height: 5,
+                        },
+                        // shadowOpacity: 0.34,
+                        shadowRadius: 6.27,
 
-            {hasPermission === true && scanned === false && (
-                <View style={{ alignSelf: "center" }}>
+                        elevation: 15,
+                    }}
+                >
                     <BarCodeScanner
                         barCodeTypes={[
                             BarCodeScanner.Constants.BarCodeType.code39,
                         ]}
                         onBarCodeScanned={getResult}
                         style={{
-                            width: Dimensions.get("screen").width * 0.8,
-                            height: Dimensions.get("screen").height * 0.7,
+                            width: Dimensions.get("screen").width * 0.78,
+                            height: Dimensions.get("screen").height * 0.5,
                         }}
                     />
                 </View>
@@ -131,8 +173,8 @@ export default function Pagamento({ navigation }) {
                 style={{
                     ...CmStyle.button,
                     alignSelf: "center",
-                    width:'80%',
-                    marginBottom: 4,
+                    width: "80%",
+                    marginBottom: 20,
                 }}
             >
                 <Text style={{ fontSize: 25, fontWeight: "bold" }}>

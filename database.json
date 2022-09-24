@@ -37,6 +37,63 @@
       },
       "dataCobranca": "2022-09-28",
       "id": 2
+    },
+    {
+      "nome": "Hibihibihi",
+      "telefone": "639393",
+      "email": "bjbibib",
+      "rg": "9-93939",
+      "cpf": "111",
+      "password": "11111111",
+      "endereco": {
+        "cep": "88160200",
+        "rua": "Rua Professor Antônio Pereira da Silva",
+        "cidade": "Biguaçu",
+        "estado": "SC",
+        "bairro": "Centro",
+        "numero": "154",
+        "complemento": ""
+      },
+      "dataCobranca": "2022-09-21",
+      "id": 3
+    },
+    {
+      "nome": "James bond",
+      "telefone": "4899999999",
+      "email": "james@gmail",
+      "rg": "44896469",
+      "cpf": "1010101010",
+      "password": "1010101010",
+      "endereco": {
+        "cep": "88110420",
+        "rua": "Rua Maceió",
+        "cidade": "São José",
+        "estado": "SC",
+        "bairro": "Bela Vista",
+        "numero": "880",
+        "complemento": ""
+      },
+      "dataCobranca": "2022-09-26",
+      "id": 4
+    },
+    {
+      "nome": "James bond",
+      "telefone": "48996643850",
+      "email": "james@gmail.com",
+      "rg": "4564589",
+      "cpf": "08745788921",
+      "password": "08745788921",
+      "endereco": {
+        "cep": "88110500",
+        "rua": "Avenida São paulo",
+        "cidade": "São José",
+        "estado": "SC",
+        "bairro": "Bela Vista",
+        "numero": "450",
+        "complemento": ""
+      },
+      "dataCobranca": "2022-09-28",
+      "id": 5
     }
   ],
   "invoices": [
@@ -102,6 +159,114 @@
       "userId": 2,
       "cashback": 23.02,
       "id": 7
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "23/09/2022 08:16PM",
+      "code": 1234534,
+      "userId": 2,
+      "cashback": 23.02,
+      "id": 8
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "23/09/2022 08:18PM",
+      "code": 1234534,
+      "userId": 2,
+      "cashback": 23.02,
+      "id": 9
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "23/09/2022 08:20PM",
+      "code": 1234534,
+      "userId": 3,
+      "cashback": 23.02,
+      "id": 10
+    },
+    {
+      "recipient": "DevInHouse Ltda",
+      "amount": 30.23,
+      "date": "23/09/2022 08:20PM",
+      "code": 545434326,
+      "userId": 3,
+      "cashback": 3.02,
+      "id": 11
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "23/09/2022 08:21PM",
+      "code": 1234534,
+      "userId": 3,
+      "cashback": 23.02,
+      "id": 12
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "23/09/2022 08:27PM",
+      "code": 1234534,
+      "userId": 4,
+      "cashback": 23.02,
+      "id": 13
+    },
+    {
+      "recipient": "DevInHouse Ltda",
+      "amount": 30.23,
+      "date": "23/09/2022 08:27PM",
+      "code": 545434326,
+      "userId": 4,
+      "cashback": 3.02,
+      "id": 14
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "23/09/2022 09:06PM",
+      "code": 1234534,
+      "userId": 2,
+      "cashback": 23.02,
+      "id": 15
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "23/09/2022 09:10PM",
+      "code": 1234534,
+      "userId": 5,
+      "cashback": 23.02,
+      "id": 16
+    },
+    {
+      "recipient": "DevInHouse Ltda",
+      "amount": 30.23,
+      "date": "23/09/2022 09:10PM",
+      "code": 545434326,
+      "userId": 5,
+      "cashback": 3.02,
+      "id": 17
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "23/09/2022 09:11PM",
+      "code": 1234534,
+      "userId": 5,
+      "cashback": 23.02,
+      "id": 18
+    },
+    {
+      "recipient": "EPP Energias do Mundo",
+      "amount": 230.23,
+      "date": "23/09/2022 09:19PM",
+      "code": 1234534,
+      "userId": 5,
+      "cashback": 23.02,
+      "id": 19
     }
   ],
   "debts": [
